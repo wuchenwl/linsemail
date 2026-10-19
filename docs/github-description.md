@@ -32,4 +32,4 @@ Linsemail 将临时收件地址、邮件阅读与邮件驱动的自动化整合�
 
 ## Publishing notes
 
-Upload the clean source directory or initialize Git there; do not initialize a public repository from an unscreened working directory containing local history. Use `README.md` as the default introduction and link `README.zh-CN.md`. Enable GitHub private vulnerability reporting. Attach the generated source ZIP, tar.gz and SHA256SUMS to the release. GitHub Actions configuration is included; hosted CI status is only known after a push.
+Upload the clean source directory or initialize Git there; do not initialize a public repository from an unscreened working directory containing local history. Use `README.md` as the default Chinese introduction and link `README.en.md` for English; `README.zh-CN.md` remains a Chinese compatibility entry. Enable GitHub private vulnerability reporting. Attach the generated source ZIP, tar.gz and SHA256SUMS to the release. GitHub Actions configuration is included; hosted CI status is only known after a push.

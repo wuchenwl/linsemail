@@ -1,6 +1,6 @@
 # API guide
 
-[简体中文](api.zh-CN.md) · [Project introduction](../README.md)
+[简体中文](api.zh-CN.md) · [Project introduction](../README.en.md)
 
 Base URL: `http://127.0.0.1:8100/api/v1`. Interactive reference: `/api/docs`. The runtime `/api/v1/openapi.json` defines exact request/response schemas and constraints. The UI locale changes display copy; machine field names, enums and IDs remain stable. Backend error details may be Chinese; clients should branch on `code`, not translated text.
 

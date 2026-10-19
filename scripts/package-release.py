@@ -13,7 +13,7 @@ import tempfile
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-ROOT_FILES = ['README.md', 'README.zh-CN.md', 'LICENSE', 'CONTRIBUTING.md', 'SECURITY.md',
+ROOT_FILES = ['README.md', 'README.zh-CN.md', 'README.en.md', 'LICENSE', 'CONTRIBUTING.md', 'SECURITY.md',
               'CODE_OF_CONDUCT.md', 'CHANGELOG.md', 'THIRD_PARTY_NOTICES.md', 'VERSION',
               '.gitignore', '.gitattributes', '.editorconfig', '.env.example',
               'app.py', 'mail_api.py', 'mailbox_clients.py', 'tasklet_client.py', 'openapi.json']
@@ -21,7 +21,7 @@ SCRIPTS = ['console-services.py', 'start-console.ps1', 'stop-console.ps1', 'test
            'screenshot-console.py', 'package-release.py', 'check-release.py',
            'summarize_tasklet_test.py', 'check_tasklet_inboxes.py', 'tasklet_mail_probe.py']
 DOCS = ['architecture.md', 'architecture.zh-CN.md', 'api.md', 'api.zh-CN.md',
-        'github-description.md', 'mailbox-prefix.md', 'screenshots/README.md', 'screenshots/manifest.json']
+        'github-description.md', 'community-post.zh-CN.md', 'mailbox-prefix.md', 'screenshots/README.md', 'screenshots/manifest.json']
 BLOCKED_PARTS = {'.runtime', '.venv', 'node_modules', '__pycache__', '.git', 'research', '.pytest_cache'}
 FIXED_TIME = (2026, 10, 19, 0, 0, 0)
 

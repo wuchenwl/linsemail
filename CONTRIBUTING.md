@@ -8,7 +8,7 @@ English and Chinese contributions are welcome. Start with a focused issue descri
 
 ## Development
 
-1. Follow the [quick start](README.md#quick-start), then stop the console before changing service configuration.
+1. Follow the [quick start](README.en.md#quick-start), then stop the console before changing service configuration.
 2. Run `npm ci --prefix frontend` and install `backend/requirements.lock.txt` in a virtual environment.
 3. Start the API and worker; run `npm run dev --prefix frontend` for the Vite development server.
 4. Run `python -m pytest backend/tests tests -q`, `node scripts/test-i18n.cjs` and `npm run build --prefix frontend`.

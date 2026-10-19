@@ -1,6 +1,6 @@
 # Architecture
 
-[简体中文](architecture.zh-CN.md) · [Project introduction](../README.md)
+[简体中文](architecture.zh-CN.md) · [Project introduction](../README.en.md)
 
 Linsemail is a local control plane for temporary receiving addresses. The database is the authority for mailbox state, ingestion order, operations and waits; the browser is a view over that state.
 

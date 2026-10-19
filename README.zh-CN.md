@@ -6,7 +6,7 @@
 
 面向开发者、QA 与自动化工作流的本地优先临时邮箱工作台。
 
-[English](README.md) · **简体中文** · [GitHub 仓库](https://github.com/wuchenwl/linsemail) · [架构设计](docs/architecture.zh-CN.md) · [API 指南](docs/api.zh-CN.md)
+[English](README.en.md) · **简体中文** · [GitHub 仓库](https://github.com/wuchenwl/linsemail) · [架构设计](docs/architecture.zh-CN.md) · [API 指南](docs/api.zh-CN.md)
 
 ![版本](https://img.shields.io/badge/version-0.3.0-111111)
 ![许可证](https://img.shields.io/badge/license-MIT-111111)
