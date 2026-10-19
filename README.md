@@ -8,8 +8,15 @@
 
 [English](README.en.md) · **简体中文** · [GitHub 仓库](https://github.com/wuchenwl/linsemail) · [架构设计](docs/architecture.zh-CN.md) · [API 指南](docs/api.zh-CN.md)
 
-![版本](https://img.shields.io/badge/version-0.3.0-111111)
-![许可证](https://img.shields.io/badge/license-MIT-111111)
+[![GitHub Stars](https://img.shields.io/github/stars/wuchenwl/linsemail?style=flat&logo=github&color=f5b942)](https://github.com/wuchenwl/linsemail/stargazers)
+[![Downloads](https://img.shields.io/github/downloads/wuchenwl/linsemail/total?style=flat&logo=github&color=2563eb)](https://github.com/wuchenwl/linsemail/releases)
+[![License](https://img.shields.io/github/license/wuchenwl/linsemail?style=flat&color=22a06b)](https://github.com/wuchenwl/linsemail/blob/main/LICENSE)
+[![Release](https://img.shields.io/github/v/release/wuchenwl/linsemail?style=flat&color=8b5cf6)](https://github.com/wuchenwl/linsemail/releases/latest)
+[![CI](https://img.shields.io/github/actions/workflow/status/wuchenwl/linsemail/ci.yml?branch=main&style=flat&label=CI&logo=githubactions)](https://github.com/wuchenwl/linsemail/actions/workflows/ci.yml)
+
+[![Python](https://img.shields.io/badge/Python-3.11%2B-3776ab?style=flat&logo=python&logoColor=white)](https://github.com/wuchenwl/linsemail#快速开始)
+[![Windows 一键启动](https://img.shields.io/badge/Windows-Auto%20launcher-0078d4?style=flat)](https://github.com/wuchenwl/linsemail#快速开始)
+[![Linux 与 macOS 手动部署](https://img.shields.io/badge/Linux%20%2F%20macOS-Manual%20setup-596579?style=flat)](https://github.com/wuchenwl/linsemail/blob/main/docs/architecture.zh-CN.md#手动部署)
 
 ![Linsemail 深色三栏收件工作台](docs/screenshots/inbox-zh-CN-dark.png)
 
@@ -151,6 +158,10 @@ python scripts/check-release.py
 ```
 
 发布包包含源码、锁文件、测试、文档与截图；排除运行数据、研究快照、凭证、依赖目录及编译产物。参与贡献见 [CONTRIBUTING](CONTRIBUTING.md)，安全说明见 [SECURITY](SECURITY.md)，版本变化见 [CHANGELOG](CHANGELOG.md)，依赖说明见 [THIRD_PARTY_NOTICES](THIRD_PARTY_NOTICES.md)。
+
+## 社区致谢
+
+感谢 [LINUX DO](https://linux.do/) 社区提供开放的技术交流与开源分享平台。
 
 ## 开源许可
 

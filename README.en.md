@@ -8,8 +8,15 @@ A local-first temporary-mail workspace for developers, QA teams and automated wo
 
 **English** · [简体中文](README.md) · [GitHub](https://github.com/wuchenwl/linsemail) · [Architecture](docs/architecture.md) · [API guide](docs/api.md)
 
-![Version](https://img.shields.io/badge/version-0.3.0-111111)
-![License](https://img.shields.io/badge/license-MIT-111111)
+[![GitHub Stars](https://img.shields.io/github/stars/wuchenwl/linsemail?style=flat&logo=github&color=f5b942)](https://github.com/wuchenwl/linsemail/stargazers)
+[![Downloads](https://img.shields.io/github/downloads/wuchenwl/linsemail/total?style=flat&logo=github&color=2563eb)](https://github.com/wuchenwl/linsemail/releases)
+[![License](https://img.shields.io/github/license/wuchenwl/linsemail?style=flat&color=22a06b)](https://github.com/wuchenwl/linsemail/blob/main/LICENSE)
+[![Release](https://img.shields.io/github/v/release/wuchenwl/linsemail?style=flat&color=8b5cf6)](https://github.com/wuchenwl/linsemail/releases/latest)
+[![CI](https://img.shields.io/github/actions/workflow/status/wuchenwl/linsemail/ci.yml?branch=main&style=flat&label=CI&logo=githubactions)](https://github.com/wuchenwl/linsemail/actions/workflows/ci.yml)
+
+[![Python](https://img.shields.io/badge/Python-3.11%2B-3776ab?style=flat&logo=python&logoColor=white)](https://github.com/wuchenwl/linsemail/blob/main/README.en.md#quick-start)
+[![Windows](https://img.shields.io/badge/Windows-Auto%20launcher-0078d4?style=flat)](https://github.com/wuchenwl/linsemail/blob/main/README.en.md#quick-start)
+[![Linux and macOS](https://img.shields.io/badge/Linux%20%2F%20macOS-Manual%20setup-596579?style=flat)](https://github.com/wuchenwl/linsemail/blob/main/docs/architecture.md#manual-setup)
 
 ![Linsemail inbox in dark mode](docs/screenshots/inbox-en-dark.png)
 
@@ -151,6 +158,10 @@ python scripts/check-release.py
 ```
 
 Archives include source, lockfiles, tests, documentation and screenshots. Runtime data, research captures, credentials, dependencies and compiled bundles are excluded. See [Contributing](CONTRIBUTING.md), [Security](SECURITY.md), [Changelog](CHANGELOG.md) and [Third-party notices](THIRD_PARTY_NOTICES.md).
+
+## Community acknowledgements
+
+Thank you to the [LINUX DO](https://linux.do/) community for providing an open platform for technical discussion and sharing open-source projects.
 
 ## License
 
