@@ -10,7 +10,6 @@ A local-first temporary-mail workspace for developers, QA teams and automated wo
 
 ![Version](https://img.shields.io/badge/version-0.3.0-111111)
 ![License](https://img.shields.io/badge/license-MIT-111111)
-![Interface](https://img.shields.io/badge/interface-English%20%2F%20中文-111111)
 
 ![Linsemail inbox in dark mode](docs/screenshots/inbox-en-dark.png)
 
@@ -27,7 +26,6 @@ The visual design is deliberately quiet. A monochrome palette, clear typography 
 - **Wait for the message you actually need.** Match new mail by sender domain, subject or text. Persisted tasks survive a closed browser tab and return an explicit message ID.
 - **Extraction you can inspect.** Verification-code and link candidates retain source spans and rule IDs. Ambiguous matches remain visible instead of silently picking one.
 - **Original mailbox identity throughout.** Reconnect to the saved session, preserve the address and fetch only message IDs observed in that inbox.
-- **A bilingual, responsive interface.** Switch between English and Simplified Chinese without reloading. Language and theme preferences persist; user labels and message content remain untouched.
 - **Credentials stay behind the API.** Provider configurations and mailbox sessions are encrypted locally. Mailbox-scoped tokens let scripts access one inbox rather than the whole workspace.
 - **Local SMTP capture included.** Exercise your own application’s mail flow without depending on an external temporary-mail provider.
 

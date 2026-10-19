@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=1280, initial-scale=1">
+<title>Linsemail — GitHub social preview</title>
+<style>
+*{box-sizing:border-box}body{margin:0;width:1280px;height:640px;background:#0b0b0b;color:#f5f5f5;font-family:"Segoe UI","Microsoft YaHei",sans-serif;overflow:hidden}
+.canvas{position:relative;width:100%;height:100%;overflow:hidden;padding:52px 58px;background:radial-gradient(ellipse at 95% 60%,#262626 0,transparent 64%)}
+.brand{display:flex;align-items:center;gap:13px;font-size:28px;font-weight:650;letter-spacing:-1px}.logo{width:41px;height:41px;display:grid;place-items:center;background:#f6f6f6;border-radius:12px;color:#121212}.logo svg{width:25px;height:25px}
+.eyebrow{margin:53px 0 17px;font-size:11px;letter-spacing:3px;color:#9b9b9b}
+h1{font-size:53px;line-height:1.43;letter-spacing:-2px;margin:0;font-weight:600}h1 span{color:#aaa}
+.sub{font-size:18px;margin:23px 0 29px;color:#bcbcbc;letter-spacing:1px}
+.facts{display:flex;gap:8px}.facts span{padding:8px 11px;border:1px solid #3a3a3a;border-radius:7px;font-size:12px;color:#d3d3d3}
+.footer{position:absolute;bottom:43px;left:58px;right:58px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid #343434;padding-top:21px;font-size:12px;color:#989898}.footer strong{font-weight:500;color:#dedede}.dot{display:inline-block;background:#c3c3c3;width:5px;height:5px;border-radius:50%;margin-right:8px}
+.screen{position:absolute;left:622px;top:126px;width:760px;border:1px solid #555;border-radius:13px;background:#161616;box-shadow:0 35px 80px #0008;overflow:hidden;transform:rotate(-3deg)}.screen-top{height:26px;border-bottom:1px solid #333;display:flex;align-items:center;gap:5px;padding-left:12px}.screen-top i{width:5px;height:5px;background:#777;border-radius:50%}.screen img{display:block;width:760px;height:auto}
+.caption{position:absolute;left:645px;top:90px;font:10px "Segoe UI",sans-serif;letter-spacing:2px;color:#8e8e8e}
+</style>
+<main class="canvas">
+ <div class="brand"><span class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="4"/><path d="m3 6 9 7 9-7"/></svg></span>linsemail</div>
+ <div class="eyebrow">MAILBOX AUTOMATION / LOCAL FIRST</div>
+ <h1>临时邮箱，<br><span>统一接入。</span></h1>
+ <p class="sub">统一 API · 持续取件 · 邮件匹配</p>
+ <div class="facts"><span>97 个来源适配器</span><span>开发测试 · 自动化工作流</span></div>
+ <div class="caption">ONE WORKSPACE. ONE API.</div>
+ <div class="screen"><div class="screen-top"><i></i><i></i><i></i></div><img src="screenshots/inbox-zh-CN-dark.png" alt="Linsemail 三栏收件工作台，合成演示数据"></div>
+ <div class="footer"><strong>wuchenwl / linsemail</strong><span><i class="dot"></i>OPEN SOURCE · MIT</span></div>
+</main>
+</html>
