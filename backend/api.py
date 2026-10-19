@@ -28,7 +28,7 @@ class Input(BaseModel):
 
 
 class CreateMailbox(Input):
-    provider_id: str = Field(min_length=1, max_length=80)
+    provider_id: str | None = Field(default=None, min_length=1, max_length=80, description='留空时按最近实测选择外部来源；本机测试箱须显式指定 local。')
     name: str = Field(default="", max_length=120)
     address_prefix: str = Field(default='', max_length=48, description='可选邮箱前缀；填写后追加16位随机字符，留空随机生成。仅支持 capabilities.custom_prefix=supported 的来源。')
     ttl_seconds: int = Field(default=3600, ge=300, le=86400, strict=True)
@@ -60,6 +60,16 @@ class CreateToken(Input):
     ttl_seconds: int = Field(default=3600, ge=60, le=86400, strict=True)
 
 
+class CreateWorkflow(CreateMailbox):
+    timeout_seconds: int = Field(default=120,ge=5,le=300,strict=True)
+    predicate: Predicate = Field(default_factory=Predicate)
+
+
+class CreateWebhook(Input):
+    url: str = Field(min_length=8,max_length=2048)
+    events: list[str] = Field(min_length=1,max_length=6)
+
+
 class ConfigureProvider(Input):
     credentials: dict[str, str] = Field(min_length=1, max_length=8)
 
@@ -68,6 +78,10 @@ def create_app(settings=None, database=None):
     settings = settings or Settings.load()
     db = database or Database(settings)
     service = Service(db)
+    from .automation import Automation
+    from .webhooks import Webhooks
+    from .intelligence import rank, snapshot
+    automation,webhooks=Automation(db),Webhooks(service)
 
     @asynccontextmanager
     async def lifespan(app):
@@ -84,7 +98,7 @@ def create_app(settings=None, database=None):
         if any(key not in allowed or len(request.query_params.getlist(key))>1 for key in request.query_params):
             raise DomainError(422,"unknown_query_parameter","查询参数未知或重复。")
 
-    app = FastAPI(title="Linsemail Console API", version="0.3.1", docs_url="/api/docs", openapi_url="/api/v1/openapi.json", lifespan=lifespan,dependencies=[Depends(strict_query)])
+    app = FastAPI(title="Linsemail Console API", version="0.4.0", docs_url="/api/docs", openapi_url="/api/v1/openapi.json", lifespan=lifespan,dependencies=[Depends(strict_query)])
     app.state.db, app.state.service = db, service
 
     @app.middleware("http")
@@ -165,12 +179,60 @@ def create_app(settings=None, database=None):
     @app.get("/api/v1/providers", tags=["providers"], response_model=out.ProviderPage)
     def providers(request:Request):
         items=service.list_providers(auth(request,"providers:read",workspace_only=True))
+        metrics=snapshot(db,[x['id'] for x in items])
+        items=[x|{'intelligence':metrics[x['id']]} for x in items]
         external=[item for item in items if item["id"]!="local"]
         return {"items":items,"next_cursor":None,"has_more":False,"summary":{
             "external_total":len(external),"adapter_total":sum(item["adapter_implemented"] for item in external),
             "ready":sum(item["admission_state"]=="enabled" for item in external),
             "credential_required":sum(item["admission_state"]=="credential_required" for item in external),
             "pending":sum(not item["adapter_implemented"] for item in external),"local":1}}
+
+    @app.get('/api/v1/providers/intelligence',tags=['intelligence'])
+    def intelligence(request:Request):
+        items=service.list_providers(auth(request,'providers:read',workspace_only=True))
+        return {'items':list(snapshot(db,[x['id'] for x in items]).values())}
+
+    @app.get('/api/v1/routing/preview',tags=['intelligence'])
+    def routing(request:Request):
+        candidates=rank(service,auth(request,'providers:read',workspace_only=True))
+        return {'selected_provider_id':candidates[0]['provider_id'] if candidates else None,'candidates':candidates}
+
+    @app.post('/api/v1/providers/{provider_id}/probes',status_code=202,tags=['intelligence'],response_model=out.Task)
+    def probe(request:Request,provider_id:str,idempotency_key:str|None=Header(None)):
+        return automation.create(auth(request),{'provider_id':provider_id,'timeout_seconds':180},idempotency_key,'probe')
+
+    @app.post('/api/v1/workflows',status_code=202,tags=['automation'],response_model=out.Task)
+    def workflow(request:Request,data:CreateWorkflow,idempotency_key:str|None=Header(None)):
+        return automation.create(auth(request),data.model_dump(exclude_none=True),idempotency_key)
+
+    @app.get('/api/v1/tasks',tags=['automation'])
+    def tasks(request:Request):
+        return automation.get(auth(request))
+
+    @app.get('/api/v1/tasks/{task_id}',tags=['automation'],response_model=out.Task)
+    def task(request:Request,task_id:str):
+        return automation.get(auth(request),task_id)
+
+    @app.delete('/api/v1/tasks/{task_id}',tags=['automation'],response_model=out.Task)
+    def cancel_task(request:Request,task_id:str):
+        return automation.get(auth(request),task_id,cancel=True)
+
+    @app.post('/api/v1/webhooks',status_code=201,tags=['integrations'],response_model=out.WebhookIssued)
+    def webhook_create(request:Request,data:CreateWebhook,idempotency_key:str|None=Header(None)):
+        return webhooks.create(auth(request),data.model_dump(),idempotency_key)
+
+    @app.get('/api/v1/webhooks',tags=['integrations'])
+    def webhook_list(request:Request):
+        return webhooks.list(auth(request))
+
+    @app.delete('/api/v1/webhooks/{subscription_id}',tags=['integrations'],response_model=out.Webhook)
+    def webhook_remove(request:Request,subscription_id:str):
+        return webhooks.remove(auth(request),subscription_id)
+
+    @app.get('/api/v1/webhook-deliveries',tags=['integrations'])
+    def webhook_deliveries(request:Request):
+        return webhooks.deliveries(auth(request))
 
     @app.get("/api/v1/providers/{provider_id}", tags=["providers"], response_model=out.Provider)
     def provider_detail(request:Request,provider_id:str):

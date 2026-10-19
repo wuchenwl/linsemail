@@ -98,7 +98,7 @@ def main():
                      'providers': 'Providers' if locale == 'en' else '邮箱来源', 'api': 'API',
                      'new': 'New mailbox' if locale == 'en' else '新建邮箱', 'cancel': 'Cancel' if locale == 'en' else '取消'}
             def navigate(view):
-                button = page.get_by_role('navigation').get_by_role('button').nth(('inbox', 'waits', 'providers', 'api').index(view))
+                button = page.get_by_role('navigation').get_by_role('button', name=re.compile('^'+re.escape(names[view])+r'(?:\s*\d+)?$'))
                 assert names[view] in button.inner_text()
                 button.click()
             def shot(view, theme='light'):

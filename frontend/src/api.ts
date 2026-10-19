@@ -2,6 +2,7 @@ import { getLocale, problemText, t } from './i18n';
 
 export interface Session { workspace_id: string; workspace_name: string; csrf_token: string; local_mode: boolean }
 export interface Provider {
+  intelligence?: { request_success_rate: number | null; delivery_success_rate: number | null; latency_p95_ms: number | null; request_samples: number; delivery_samples: number; health: string };
   id: string; name: string; description: string; mailbox_access: string; admission_state: string; transport: string[];
   homepage: string | null; blocked_reason: string | null; adapter_implemented: boolean; configured: boolean;
   capabilities: Record<string, string>; documentation: string[];

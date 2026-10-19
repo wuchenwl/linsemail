@@ -75,3 +75,11 @@ Errors use `application/problem+json` with `status`, `code`, `detail` and `reque
 ## Local capture
 
 Create a mailbox with `provider_id: "local"`, wait for it to become active and send a test message to its assigned `@local.linsemail.test` address through SMTP at `127.0.0.1:1025`. Only active local recipients are accepted. No internet MX or public SMTP delivery is configured by this feature.
+
+## Routing, composite tasks and integrations
+
+Mailbox creation accepts an omitted `provider_id`. `GET /routing/preview` returns eligible ranked sources; `GET /providers/intelligence` returns measured health, P95 latency and wait outcomes. `POST /providers/PROVIDER/probes` queues a durable health probe.
+
+`POST /workflows` accepts mailbox fields, `predicate` and a total timeout of 5–300 seconds. `GET /tasks`, `GET /tasks/TASK_ID` and `DELETE /tasks/TASK_ID` list, inspect and cancel tasks. Workflows and probes require workspace credentials.
+
+`POST /webhooks` creates an idempotent signed-event subscription; GET lists subscriptions, DELETE disables a subscription and `GET /webhook-deliveries` lists delivery results. See the [integration guide](agent.md) for events and signature verification. New task/subscription/delivery lists currently return at most 100 rows; existing mailbox/message pagination is unchanged. MCP calls the same API with the same permissions.

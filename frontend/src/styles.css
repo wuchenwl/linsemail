@@ -432,3 +432,31 @@ html[lang="en"] .source-filters button { white-space: nowrap; }
   html[lang="en"] .heading-copy { max-width: 270px; }
 }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+
+.automation-panel { display: grid; gap: 22px; }
+.automation-intro { display: flex; gap: 16px; align-items: center; padding: 12px 0 20px; }
+.automation-intro h2 { font-size: 24px; font-weight: 550; margin: 0 0 8px; letter-spacing: -.6px; }
+.automation-intro p, .automation-card > p { color: var(--muted); font-size: 13px; line-height: 1.8; }
+.automation-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; align-items: start; }
+.automation-card { min-width: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 27px; }
+.automation-card h3 { display: flex; align-items: center; gap: 8px; font-size: 20px; letter-spacing: -.5px; font-weight: 550; margin: 12px 0 20px; }
+.automation-card form { display: grid; gap: 15px; }
+.automation-card label { display: grid; gap: 8px; font-size: 12px; color: var(--muted); }
+.automation-card input, .automation-card select { width: 100%; color: var(--ink); background: var(--subtle); border: 1px solid var(--strong-line); border-radius: 7px; padding: 10px 12px; }
+.automation-card .button { justify-self: start; margin-top: 5px; }
+.automation-card pre, .automation-secret { background: var(--subtle); padding: 16px; border: 1px solid var(--line); border-radius: 8px; overflow-wrap: anywhere; }
+.automation-card pre { overflow-x: auto; font-size: 12px; }
+.automation-secret { margin-top: 18px; font-size: 12px; }
+.automation-secret code { display: block; margin: 12px 0; }
+.automation-task, .automation-hooks > div, .automation-delivery { display: flex; gap: 14px; align-items: center; border-top: 1px solid var(--line); padding: 16px 0; font-size: 12px; }
+.automation-task > div, .automation-hooks span { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.automation-task small, .automation-hooks small { display: block; margin-top: 6px; color: var(--muted); }
+.automation-task strong, .automation-hooks strong { font-weight: 500; }
+.automation-delivery { justify-content: space-between; }
+.automation-error { padding: 16px; border: 1px solid var(--strong-line); border-radius: 8px; overflow-wrap: anywhere; }
+.provider-metrics small { font-size: 10px; color: var(--faint); }
+@media (max-width: 800px) { .automation-columns { grid-template-columns: minmax(0, 1fr); } .automation-card { padding: 20px; } .automation-intro h2 { font-size: 20px; } }
+@media (max-width: 800px) {
+  .topbar nav, html[lang="en"] .topbar nav { min-width: 0; overflow-x: auto; flex-wrap: nowrap; justify-content: flex-start; }
+  .topbar nav button { flex-shrink: 0; }
+}

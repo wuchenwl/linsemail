@@ -13,6 +13,9 @@ class Settings:
     local_session: bool = True
     smtp_port: int = 1025
     api_port: int = 8100
+    provider_probes: bool = True
+    provider_probe_interval: int = 300
+    webhook_allow_loopback: bool = False
 
     @classmethod
     def load(cls):
@@ -25,4 +28,7 @@ class Settings:
         if not database_url:
             raise RuntimeError("Database not configured. Run scripts/start-console.ps1 first.")
         return cls(runtime, database_url, os.environ.get("LINSEMAIL_LOCAL_SESSION", "1") == "1",
-                   int(os.environ.get("LINSEMAIL_SMTP_PORT", "1025")), int(os.environ.get("LINSEMAIL_PORT", "8100")))
+                   int(os.environ.get("LINSEMAIL_SMTP_PORT", "1025")), int(os.environ.get("LINSEMAIL_PORT", "8100")),
+                   os.environ.get("LINSEMAIL_PROVIDER_PROBES", "1") == "1",
+                   max(60, int(os.environ.get("LINSEMAIL_PROVIDER_PROBE_INTERVAL", "300"))),
+                   os.environ.get("LINSEMAIL_WEBHOOK_ALLOW_LOOPBACK", "0") == "1")

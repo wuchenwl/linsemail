@@ -1,5 +1,17 @@
 # Architecture
 
+## Intelligent control layer (v0.4.0)
+
+Provider observations distinguish successful create/list/read requests from completed wait outcomes. Missing samples return null. Statistics use a 24-hour window, at most 20,000 recent observations and 1,000 per source; observations are retained for seven days.
+
+Routing excludes unconfigured/disabled sources, unsupported prefix capabilities and local capture. Score: `((request_successes+2)/(request_count+4)) * ((wait_matches+2)/(completed_waits+4)) / (1+p95_ms/10000)`. Ties prefer official API sources, then provider ID. Three consecutive request failures open a five-minute cooldown. Selection occurs inside the idempotent creation callback, so replays retain the original mailbox.
+
+Composite tasks reuse existing operations, sync jobs and waits. Stable task-derived step keys and fenced 30-second leases recover after interruption. Uncertain creation fails without opening a second mailbox. Cancellation retains existing mailboxes; total deadlines bound the entire workflow. Separate tables are created at initialization without modifying existing columns or encryption keys. Back up the database and runtime, and stop old workers before upgrading. A code rollback may leave the additive tables in place; pending new tasks require the new worker to resume.
+
+Webhook outbox rows commit atomically with resource events. A rotating four-slot worker handles mailbox operations, pickup, tasks and signed deliveries. Bounded retries are at least once; receivers deduplicate event IDs. DNS-validated, IP-pinned connections prevent callbacks into private infrastructure. MCP provides 11 stdio tools over the same authenticated API instead of another business state store.
+
+See the [roadmap](roadmap.md) for implemented boundaries and future work, and the [integration guide](agent.md) for configuration, signing and invocation examples.
+
 [简体中文](architecture.zh-CN.md) · [Project introduction](../README.en.md)
 
 Linsemail is a local control plane for temporary receiving addresses. The database is the authority for mailbox state, ingestion order, operations and waits; the browser is a view over that state.

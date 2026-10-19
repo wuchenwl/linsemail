@@ -172,3 +172,61 @@ class ProviderConfiguration(Base):
     vault_blob: Mapped[str | None] = mapped_column(Text)
     last_check: Mapped[dict | None] = mapped_column(JSON)
     updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now)
+
+
+class ProviderObservation(Base):
+    __tablename__ = "provider_observations"
+    id: Mapped[str] = mapped_column(String(80), primary_key=True)
+    provider_id: Mapped[str] = mapped_column(String(80), index=True)
+    action: Mapped[str] = mapped_column(String(24))
+    succeeded: Mapped[bool] = mapped_column(Boolean)
+    latency_ms: Mapped[int] = mapped_column(Integer)
+    error_code: Mapped[str | None] = mapped_column(String(120))
+    occurred_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now, index=True)
+
+
+class AutomationTask(Base):
+    __tablename__ = "automation_tasks"
+    id: Mapped[str] = mapped_column(String(80), primary_key=True)
+    workspace_id: Mapped[str] = mapped_column(ForeignKey("workspaces.id"), index=True)
+    kind: Mapped[str] = mapped_column(String(24))
+    state: Mapped[str] = mapped_column(String(24), default="queued", index=True)
+    payload: Mapped[dict] = mapped_column(JSON)
+    result: Mapped[dict] = mapped_column(JSON, default=dict)
+    error: Mapped[dict | None] = mapped_column(JSON)
+    attempts: Mapped[int] = mapped_column(Integer, default=0)
+    next_due_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now)
+    lease_owner: Mapped[str | None] = mapped_column(String(80))
+    lease_until: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    lease_epoch: Mapped[int] = mapped_column(Integer, default=0)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now)
+    deadline_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now)
+
+
+class WebhookSubscription(Base):
+    __tablename__ = "webhook_subscriptions"
+    id: Mapped[str] = mapped_column(String(80), primary_key=True)
+    workspace_id: Mapped[str] = mapped_column(ForeignKey("workspaces.id"), index=True)
+    url: Mapped[str] = mapped_column(String(2048))
+    events: Mapped[list] = mapped_column(JSON)
+    vault_blob: Mapped[str] = mapped_column(Text)
+    active: Mapped[bool] = mapped_column(Boolean, default=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now)
+
+
+class WebhookDelivery(Base):
+    __tablename__ = "webhook_deliveries"
+    __table_args__ = (UniqueConstraint("subscription_id", "event_id"),)
+    id: Mapped[str] = mapped_column(String(80), primary_key=True)
+    subscription_id: Mapped[str] = mapped_column(ForeignKey("webhook_subscriptions.id"), index=True)
+    event_id: Mapped[str] = mapped_column(String(80))
+    payload: Mapped[dict] = mapped_column(JSON)
+    state: Mapped[str] = mapped_column(String(24), default="pending", index=True)
+    attempts: Mapped[int] = mapped_column(Integer, default=0)
+    next_due_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now)
+    lease_until: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    lease_epoch: Mapped[int] = mapped_column(Integer, default=0)
+    status_code: Mapped[int | None] = mapped_column(Integer)
+    error_code: Mapped[str | None] = mapped_column(String(120))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now)

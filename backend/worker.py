@@ -5,6 +5,7 @@ import json
 import random
 import signal
 import threading
+import time
 
 from sqlalchemy import delete, or_, select
 
@@ -22,8 +23,15 @@ class Worker:
         self.bridge = LegacyBridge(database)
         self.owner = uid("worker")
         self.stop_event = threading.Event()
+        from .automation import Automation
+        from .webhooks import Webhooks
+        from .service import Service
+        self.automation=Automation(database,self.owner)
+        self.webhooks=Webhooks(Service(database))
 
-    def record_provider_check(self, session, provider_id, action, error):
+    def record_provider_check(self, session, provider_id, action, error, latency_ms=0):
+        from .intelligence import observe
+        observe(session,provider_id,action,error is None,latency_ms,error['code'] if error else None)
         if provider_id == "local":
             return
         config = session.get(ProviderConfiguration, provider_id)
@@ -75,6 +83,11 @@ class Worker:
             session.execute(delete(Event).where(Event.occurred_at<stamp-timedelta(hours=24)))
             session.execute(delete(Idempotency).where(Idempotency.created_at<stamp-timedelta(hours=24)))
             session.execute(delete(WorkerHeartbeat).where(WorkerHeartbeat.updated_at<stamp-timedelta(hours=24)))
+            from .models import AutomationTask, ProviderObservation, WebhookDelivery
+            from .automation import TERMINAL
+            session.execute(delete(ProviderObservation).where(ProviderObservation.occurred_at<stamp-timedelta(days=7)))
+            session.execute(delete(AutomationTask).where(AutomationTask.state.in_(TERMINAL),AutomationTask.updated_at<stamp-timedelta(days=7)))
+            session.execute(delete(WebhookDelivery).where(WebhookDelivery.state.in_(['succeeded','failed']),WebhookDelivery.created_at<stamp-timedelta(days=7)))
 
     def _budget(self, session, provider_id):
         budget = session.get(ProviderBudget, provider_id)
@@ -110,6 +123,7 @@ class Worker:
 
     def execute_operation(self, task):
         operation, box, message, epoch = task
+        started=time.monotonic()
         error, output, vault = None, None, box.vault_blob
         try:
             if operation.type == "create_mailbox":
@@ -161,7 +175,7 @@ class Worker:
                     emit(session,workspace,"wait.terminated",current.id,wait_id=wait.id,version=wait.version)
                 current.vault_blob=None;current.state="deleted";current.sync_state="idle";current.version+=1;op.state="succeeded"
             if operation.type in ("create_mailbox", "fetch_body"):
-                self.record_provider_check(session, box.provider_id, "create" if operation.type=="create_mailbox" else "read_text", op.error)
+                self.record_provider_check(session, box.provider_id, "create" if operation.type=="create_mailbox" else "read_text", op.error,(time.monotonic()-started)*1000)
             op.updated_at=now();op.lease_until=None
             job.lease_owner=None;job.lease_until=None
             emit(session,workspace,"operation.completed",current.id,version=current.version)
@@ -184,6 +198,7 @@ class Worker:
 
     def execute_sync(self, task):
         box,epoch=task
+        started=time.monotonic()
         error,items,vault=None,[],box.vault_blob
         try:
             if box.provider_id=="local":
@@ -216,7 +231,7 @@ class Worker:
                 current.last_success_at=now();current.last_error=None;current.sync_state="idle";current.version+=1;job.failures=0
                 waiting=session.scalar(select(WaitJob.id).where(WaitJob.mailbox_id==current.id,WaitJob.state=="waiting").limit(1))
                 job.next_due_at=now()+timedelta(seconds=2 if box.provider_id=="local" else 10 if waiting else 30)
-            self.record_provider_check(session, box.provider_id, "list", error)
+            self.record_provider_check(session, box.provider_id, "list", error,(time.monotonic()-started)*1000)
             for operation in session.scalars(select(Operation).where(Operation.resource_id==box.id,Operation.type=="sync_mailbox",Operation.state.in_(["queued","running"]))):
                 operation.state="failed" if error else "succeeded";operation.error=error;operation.updated_at=now()
             job.lease_owner=None;job.lease_until=None
@@ -229,6 +244,12 @@ class Worker:
         sync=self.claim_sync()
         if sync:
             self.execute_sync(sync)
+        task=self.automation.claim()
+        if task:
+            self.automation.execute(task)
+        delivery=self.webhooks.claim()
+        if delivery:
+            self.webhooks.execute(delivery)
 
     def run(self):
         print(json.dumps({"service":"linsemail-worker","status":"ready","smtp_port":self.db.settings.smtp_port}),flush=True)
@@ -236,6 +257,8 @@ class Worker:
         # waits on its network timeout. Do not claim leases into an unbounded queue.
         with ThreadPoolExecutor(max_workers=4,thread_name_prefix="pickup") as pool:
             active=set()
+            next_probe=0
+            rotation=0
             while not self.stop_event.is_set():
                 try:
                     for future in list(active):
@@ -243,12 +266,17 @@ class Worker:
                             active.remove(future)
                             future.result()
                     self.maintain()
-                    for claim,execute in ((self.claim_operation,self.execute_operation),(self.claim_sync,self.execute_sync)):
+                    if time.monotonic()>=next_probe:
+                        self.automation.schedule_probe();next_probe=time.monotonic()+30
+                    queues=((self.claim_operation,self.execute_operation),(self.claim_sync,self.execute_sync),
+                            (self.automation.claim,self.automation.execute),(self.webhooks.claim,self.webhooks.execute))
+                    for claim,execute in queues[rotation:]+queues[:rotation]:
                         if len(active)>=4:
                             break
                         task=claim()
                         if task:
                             active.add(pool.submit(execute,task))
+                    rotation=(rotation+1)%len(queues)
                 except Exception as error:
                     # No response bodies, addresses or connection URLs in logs.
                     print(json.dumps({"status":"tick_error","type":type(error).__name__}),flush=True)

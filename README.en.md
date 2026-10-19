@@ -26,6 +26,22 @@ Temporary-mail providers disagree on authentication, mailbox lifetime, message I
 
 The visual design is deliberately quiet. A monochrome palette, clear typography and a three-pane inbox keep addresses, message lists and message content together. Underneath, PostgreSQL, durable jobs and explicit operation states keep automation grounded in observable results.
 
+## Observable, recoverable mail workflows
+
+| Capability | Available now |
+| --- | --- |
+| **Provider Intelligence** | Rotating create/list probes, request health, P95 latency and observed wait matching outcomes; no samples means unknown |
+| **Smart Routing** | Omit the provider to select an eligible external source using configuration, prefix capabilities, measured scores and failure cooldowns |
+| **Unified Mail API** | One contract for mailboxes, messages, operations and tasks across upstream protocols |
+| **Persistent Workflow** | A durable create-and-wait task with idempotent steps, recovery, cancellation and a total deadline |
+| **Developer integrations** | 11 MCP stdio tools and signed webhooks with a transactional outbox and visible retries |
+
+![Linsemail automation](docs/agent-screenshots/automation-en-dark.png)
+
+[MCP / webhook integration guide](docs/agent.md) · [Implementation boundaries and roadmap](docs/roadmap.md)
+
+Active probes validate mailbox creation and listing, **not end-to-end delivery**. Delivery rates come from completed waits and include sender/predicate effects. Live provider availability and independent delivery performance require separate verification.
+
 ## What makes it useful
 
 - **A workspace, not just an address generator.** Manage mailbox lifetime, inspect sync freshness, read messages and track errors in one place.
@@ -38,7 +54,7 @@ The visual design is deliberately quiet. A monochrome palette, clear typography 
 
 ## Provider coverage, precisely stated
 
-| Catalog at v0.3.1 | Count | Meaning |
+| Catalog at v0.4.0 | Count | Meaning |
 | --- | ---: | --- |
 | External provider entries | 127 | Discovered services with catalog metadata |
 | Implemented external adapters | 97 | Executable create/list/body protocols |

@@ -67,8 +67,17 @@ def workspace_lock(session, workspace_id):
 def emit(session, workspace, event_type, mailbox_id=None, message_id=None, wait_id=None, version=1):
     workspace.event_seq += 1
     event = Event(id=uid("evt"), workspace_id=workspace.id, seq=workspace.event_seq, type=event_type,
-                  mailbox_id=mailbox_id, message_id=message_id, wait_id=wait_id, resource_version=version)
+                  mailbox_id=mailbox_id, message_id=message_id, wait_id=wait_id, resource_version=version, occurred_at=now())
     session.add(event)
+    if wait_id and event_type in ('wait.matched','wait.terminated'):
+        wait=session.get(WaitJob,wait_id)
+        if wait and wait.state in ('matched','timed_out','expired'):
+            from .intelligence import observe
+            mailbox=session.get(Mailbox,mailbox_id)
+            observe(session,mailbox.provider_id,'delivery',wait.state=='matched',
+                    (now()-aware(wait.created_at)).total_seconds()*1000,identity=event.id)
+    from .webhooks import enqueue
+    enqueue(session,event)
     return event
 
 
@@ -204,15 +213,19 @@ class Service:
             prefix = normalize_address_prefix(payload.get('address_prefix'))
         except ProviderError as exc:
             raise DomainError(422, exc.code, str(exc)) from None
-        provider = provider_info(payload["provider_id"])
-        if not provider:
-            raise DomainError(422, "unsupported_provider", "该来源未接入当前工作台。")
-        provider = self.get_provider(principal, provider["id"])
-        if prefix and provider['capabilities'].get('custom_prefix') != 'supported':
-            raise DomainError(422, 'custom_prefix_unsupported', '该来源暂不支持自定义邮箱前缀，请留空以使用上游随机地址。')
-        if provider["admission_state"] != "enabled":
-            raise DomainError(409, "provider_" + provider["admission_state"], provider["blocked_reason"] or "该来源暂不可创建邮箱。")
         def create(session, workspace):
+            provider_id=payload.get('provider_id')
+            if provider_id is None:
+                from .intelligence import choose
+                provider_id=choose(self,principal,prefix)
+            provider = provider_info(provider_id)
+            if not provider:
+                raise DomainError(422, "unsupported_provider", "该来源未接入当前工作台。")
+            provider = self.get_provider(principal, provider["id"])
+            if prefix and provider['capabilities'].get('custom_prefix') != 'supported':
+                raise DomainError(422, 'custom_prefix_unsupported', '该来源暂不支持自定义邮箱前缀，请留空以使用上游随机地址。')
+            if provider["admission_state"] != "enabled":
+                raise DomainError(409, "provider_" + provider["admission_state"], provider["blocked_reason"] or "该来源暂不可创建邮箱。")
             count = session.scalar(select(func.count()).select_from(Mailbox).where(Mailbox.workspace_id == workspace.id, Mailbox.state.in_(["creating", "active"])))
             if count >= 100:
                 raise DomainError(429, "workspace_limit", "当前工作区最多保留 100 个活跃邮箱。")
@@ -252,6 +265,8 @@ class Service:
         item = next((item for item in self.list_providers(principal) if item["id"] == provider_id), None)
         if item is None:
             raise DomainError(404, "provider_not_found", "来源不存在。")
+        from .intelligence import snapshot
+        item['intelligence']=snapshot(self.db,[provider_id])[provider_id]
         return item
 
     def configure_provider(self, principal, provider_id, credentials):

@@ -18,8 +18,8 @@
       "theme": "light",
       "width": 1440,
       "height": 1000,
-      "bytes": 85228,
-      "sha256": "d2564fc96a01fbbce9ffa62fcf68c13d47c08a12c707007201df3a2e480f9c21"
+      "bytes": 85722,
+      "sha256": "04e8667705e2ffe6a336cd2ae802c108dc87f13bd0ee4a7d48790b04a69bb494"
     },
     {
       "file": "inbox-en-dark.png",
@@ -28,8 +28,8 @@
       "theme": "dark",
       "width": 1440,
       "height": 1000,
-      "bytes": 86096,
-      "sha256": "891255992fc6b10a318f0cee0c5fbd1b686a2e8cef7b048bcfb6a69a023c3d62"
+      "bytes": 86553,
+      "sha256": "849ebb7cfe1175cb66189c58bab91cf404ba404b61fbc76541a5ca73d774e38b"
     },
     {
       "file": "waits-en-light.png",
@@ -38,8 +38,8 @@
       "theme": "light",
       "width": 1440,
       "height": 1000,
-      "bytes": 48219,
-      "sha256": "a1e60c6ab126ed4d966f48daa4fbace72e22b95b2438a903fb160feb755542f3"
+      "bytes": 48705,
+      "sha256": "0e05e44e5bbafc578562c80b674dfae19e0cc795d1c47131c7ff602593fe775f"
     },
     {
       "file": "providers-en-light.png",
@@ -48,8 +48,8 @@
       "theme": "light",
       "width": 1440,
       "height": 1000,
-      "bytes": 59413,
-      "sha256": "688c41b554f83daea17c32c3fb9e42b92769dc745cc71f04ed5cf650e78acf01"
+      "bytes": 59635,
+      "sha256": "01a89da4dadcd0af4c4f637051d36b761493c9b1c9ee079377db9ce3168934c9"
     },
     {
       "file": "api-en-light.png",
@@ -58,8 +58,8 @@
       "theme": "light",
       "width": 1440,
       "height": 1000,
-      "bytes": 74537,
-      "sha256": "6d30f7cc340b02465f4c8154b10484ec29fb3e90bee154d23ec3263abde5fa2d"
+      "bytes": 76436,
+      "sha256": "fec28ac884c38afc1ec10a5e0066bc68dc513841109591e9d45114844dd0ec3d"
     },
     {
       "file": "create-en-light.png",
@@ -68,8 +68,8 @@
       "theme": "light",
       "width": 1440,
       "height": 1000,
-      "bytes": 141365,
-      "sha256": "1816f0004a913957953d480e10d6332cc8f97a13c6ae77ff1a2e8ad92e0a5f18"
+      "bytes": 145451,
+      "sha256": "98b4ecf6cdcba9339ade74d48e765836f6c053d32fbb3c0383174dacc2282dd1"
     },
     {
       "file": "mobile-en-dark.png",
@@ -78,8 +78,8 @@
       "theme": "dark",
       "width": 390,
       "height": 844,
-      "bytes": 39730,
-      "sha256": "7226f283d0f4af7ad6767306f82cadf85e33824aa6351d7f7c0f542ef4e60b59"
+      "bytes": 40050,
+      "sha256": "255866c40f2f400467f4d2ed965ccd5792181a1ec13163e0875fa88213536094"
     },
     {
       "file": "login-zh-CN-light.png",
@@ -98,8 +98,8 @@
       "theme": "light",
       "width": 1440,
       "height": 1000,
-      "bytes": 89274,
-      "sha256": "bd5a7747566bbb992438c81a7afec5a5008c54deb038702240702ba614ec25f5"
+      "bytes": 89781,
+      "sha256": "004f5a6b303b913936ca8ed36d6986567ea929332fba9b299903a983eeb48a2a"
     },
     {
       "file": "inbox-zh-CN-dark.png",
@@ -108,8 +108,8 @@
       "theme": "dark",
       "width": 1440,
       "height": 1000,
-      "bytes": 89812,
-      "sha256": "1f422cc45a37a6de3c10b59e7f0878b1fe84c608cd2b382274e5123f0d559c54"
+      "bytes": 90380,
+      "sha256": "b6cb2324f8a80946f329368bf3b0d0d05c5dfd0ac000d24c9e57453244a4c75b"
     },
     {
       "file": "waits-zh-CN-light.png",
@@ -118,8 +118,8 @@
       "theme": "light",
       "width": 1440,
       "height": 1000,
-      "bytes": 49020,
-      "sha256": "5cb1368a80a0324ac374c40d3b46cd3d548e67180faee063e455a1926f5ed050"
+      "bytes": 49448,
+      "sha256": "f1ef2b13b724abcaa195728cfce99c4cb048ef80038f827b33f4a896f06b4c32"
     },
     {
       "file": "providers-zh-CN-light.png",
@@ -128,8 +128,8 @@
       "theme": "light",
       "width": 1440,
       "height": 1000,
-      "bytes": 71499,
-      "sha256": "8fd7a77bb3c2f80f8fb86fd516b321cb5614f65485d02bca6974c2ab3c567942"
+      "bytes": 71673,
+      "sha256": "dea3578a7ba41399c57167e7407e0be136662258a03ef1c6bf3388342416fe5c"
     },
     {
       "file": "api-zh-CN-light.png",
@@ -138,8 +138,8 @@
       "theme": "light",
       "width": 1440,
       "height": 1000,
-      "bytes": 78837,
-      "sha256": "5caf823d72f4b6d22b11eee8a1c2ae52e7ee02e3d1f04fa40eee196e36ba91ea"
+      "bytes": 80342,
+      "sha256": "6e214ebd00f8eb5ed3402bf4ff095e5e8f5587a69b83d064f6a698f4d883837d"
     },
     {
       "file": "create-zh-CN-light.png",
@@ -148,8 +148,8 @@
       "theme": "light",
       "width": 1440,
       "height": 1000,
-      "bytes": 139631,
-      "sha256": "60addf073deb39156a681b0511752d31a49dc7d92456aad6492a082b088674ff"
+      "bytes": 141473,
+      "sha256": "d072a789f6d9dea15eab552600f263577af62daed19a0e32cfa67575a3dacda4"
     },
     {
       "file": "mobile-zh-CN-dark.png",
@@ -158,8 +158,8 @@
       "theme": "dark",
       "width": 390,
       "height": 844,
-      "bytes": 41851,
-      "sha256": "899eca7340883709bed31ec79c661f69985e83a89a43ebf8b1b506d6198b1c83"
+      "bytes": 42260,
+      "sha256": "460791f4e647c1395d91bc83800723d896f8832ef67e53a342370030a1a0471c"
     }
   ],
   "layouts": [

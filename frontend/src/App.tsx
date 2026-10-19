@@ -1,3 +1,4 @@
+import { AutomationPanel } from './AutomationPanel';
 import { setLocale, t, useLocale, type Locale } from './i18n';
 import { useEffect, useMemo, useRef, useState, type FormEvent, type ReactNode } from 'react';
 import { useInfiniteQuery, useQuery, useQueryClient } from '@tanstack/react-query';
@@ -25,9 +26,10 @@ const sourceStates: Record<string, string> = {
   enabled: '已接入', credential_required: '待配置', adapter_required: '待适配',
   deployment_required: '需自建部署', alias_only: '转发别名',
 };
-type View = 'inbox' | 'waits' | 'providers' | 'api';
+type View = 'inbox' | 'waits' | 'providers' | 'automation' | 'api';
 const tabs: { id: View; label: string; icon: typeof Inbox }[] = [
   { id: 'inbox', label: '收件工作台', icon: Inbox }, { id: 'waits', label: '取件任务', icon: Clock3 },
+  { id: 'automation', label: '自动化', icon: Radio },
   { id: 'providers', label: '邮箱来源', icon: Layers3 }, { id: 'api', label: 'API', icon: Code2 },
 ];
 
@@ -73,17 +75,18 @@ function CreateForm({ providers, initialProvider, pending, close, submit }: {
   function handle(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    submit({ provider_id: provider, name: data.get('name'), address_prefix: customPrefix ? prefix.trim() : '', ttl_seconds: Number(data.get('ttl')), labels: [] });
+    submit({ ...(provider ? { provider_id: provider } : {}), name: data.get('name'), address_prefix: customPrefix ? prefix.trim() : '', ttl_seconds: Number(data.get('ttl')), labels: [] });
   }
   const source = providers.find(item => item.id === provider);
-  const customPrefix = source?.capabilities.custom_prefix === 'supported';
+  const customPrefix = !provider || source?.capabilities.custom_prefix === 'supported';
   return <Modal title={t("一个新的收件地址。")} caption={t("选择来源、设置保留时间，其余交给工作台。")} close={close}>
     <form onSubmit={handle}>
       <label>{t("邮箱名称")}<span>{t("便于识别，可选")}</span><input name="name" maxLength={120} placeholder={t("例如：产品测试")} autoFocus /></label>
       <label>{t("邮箱来源")}<div className="select-wrap"><select value={provider} onChange={event => setProvider(event.target.value)}>
+        <option value="">{t('自动选择（智能路由）')}</option>
         {providers.map(item => <option key={item.id} value={item.id} disabled={item.admission_state !== 'enabled'}>{t(item.name)}{item.admission_state !== 'enabled' ? ' · ' + t(sourceStates[item.admission_state]) : ''}</option>)}
       </select><ChevronDown size={16} /></div></label>
-      <div className="source-note"><ShieldCheck size={17} /><p>{t(source?.description) || t("正在加载来源…")}</p></div>
+      <div className="source-note"><ShieldCheck size={17} /><p>{(!provider ? t('根据近期健康度与延迟选择可用的外部来源；无样本时按冷启动策略选择。') : t(source?.description)) || t("正在加载来源…")}</p></div>
       <label>{t("邮箱前缀")}<span>{t("可选，留空随机生成")}</span><input name="address_prefix" value={prefix}
         onChange={event => setPrefix(event.target.value)} maxLength={48} pattern="[A-Za-z0-9]([A-Za-z0-9]|-){0,47}"
         disabled={!customPrefix} placeholder={customPrefix ? t("例如：my-test-") : t("此来源使用随机地址")} autoCapitalize="none" spellCheck={false}
@@ -96,7 +99,7 @@ function CreateForm({ providers, initialProvider, pending, close, submit }: {
       </select><ChevronDown size={16} /></div></label>
       <p className="fine-print">{t("到期后自动停止取件，本地邮件在 15 分钟宽限期后清理。第三方来源的可用期可能更短。")}</p>
       <div className="modal-actions"><button type="button" className="button secondary" onClick={close} disabled={pending}>{t("取消")}</button>
-        <button className="button primary" disabled={pending || source?.admission_state !== 'enabled'}>{pending ? <LoaderCircle size={16} className="spin" /> : <Plus size={16} />}{t("创建邮箱")}</button></div>
+        <button className="button primary" disabled={pending || (!!provider && source?.admission_state !== 'enabled')}>{pending ? <LoaderCircle size={16} className="spin" /> : <Plus size={16} />}{t("创建邮箱")}</button></div>
     </form>
   </Modal>;
 }
@@ -194,7 +197,7 @@ function Console({ session, theme, toggle, logout }: { session: Session; theme: 
   const [issuedToken, setIssuedToken] = useState('');
   const [sourceSearch, setSourceSearch] = useState('');
   const [sourceFilter, setSourceFilter] = useState('all');
-  const [createProvider, setCreateProvider] = useState('local');
+  const [createProvider, setCreateProvider] = useState('');
   const [configureSource, setConfigureSource] = useState<Provider | null>(null);
   const [, tick] = useState(0);
   const boxesQuery = useInfiniteQuery({
@@ -288,7 +291,7 @@ function Console({ session, theme, toggle, logout }: { session: Session; theme: 
     </header>
     <main className="main">
       <section className="page-heading">
-        <div><p className="eyebrow">YOUR MAIL, IN FOCUS</p><h1>{view === 'inbox' ? t("收件工作台") : view === 'waits' ? t("取件任务") : view === 'providers' ? t("邮箱来源") : t("为你的工作流而生")}<span>.</span></h1>
+        <div><p className="eyebrow">YOUR MAIL, IN FOCUS</p><h1>{view === 'inbox' ? t("收件工作台") : view === 'waits' ? t("取件任务") : view === 'providers' ? t("邮箱来源") : t("统一收件与接口集成")}<span>.</span></h1>
           <p className="heading-copy">{view === 'inbox' ? t("管理每一个地址，接住每一封来信。") : view === 'waits' ? t("设好条件，让来信主动找到你。") : view === 'providers' ? t("不同的来源，同一种清晰的收件体验。") : t("从创建邮箱，到等待来信，全部通过 API 完成。")}</p></div>
         <div className="heading-actions"><span className="worker-status"><span className={'status-dot' + (!health.data?.worker_online ? ' hollow' : '')} />{health.data?.worker_online ? t("取件服务运行中") : health.isPending ? t("连接服务中") : t("取件服务离线")}</span>
           <button className="button primary" onClick={() => setModal('create')}><Plus size={16} />{t("新建邮箱")}</button></div>
@@ -361,7 +364,10 @@ function Console({ session, theme, toggle, logout }: { session: Session; theme: 
           <dl><div><dt>{t("访问方式")}</dt><dd>{t(accessNames[item.mailbox_access]) || t("来源账户")}</dd></div>
             <div><dt>{t("取件方式")}</dt><dd>{item.id === 'local' ? t("SMTP → 本地入库") : item.adapter_implemented ? t("Worker 自动轮询") : t("待接通")}</dd></div>
             <div><dt>{t("最近实测")}</dt><dd>{item.last_check ? (item.last_check.status === 'ok' ? t("通过 · ") : t("失败 · ")) + formatTime(item.last_check.checked_at) : item.id === 'local' ? t("本机接收") : t("尚未实测")}</dd></div></dl>
-          <p className="fine-print">{item.last_check?.status === 'failed' ? t("最近错误：") + item.last_check.code : t(item.blocked_reason) || (item.id === 'local' ? t("仅接收发往本机的测试邮件。") : t("第三方投递与网站注册兼容性需分别验证。"))}</p>
+          <p className="fine-print">{item.last_check?.status === 'failed' ? t("最近错误：") + item.last_check.code : t(item.blocked_reason) || (item.id === 'local' ? t("仅接收发往本机的测试邮件。") : t("来源可用性以实时观测为准。"))}</p>
+          <dl className="provider-metrics"><div><dt>{t('请求成功率')}</dt><dd>{item.intelligence?.request_success_rate == null ? '—' : Math.round(item.intelligence.request_success_rate * 100) + '%'} <small>({item.intelligence?.request_samples || 0})</small></dd></div><div><dt>{t('收件成功率')}</dt><dd>{item.intelligence?.delivery_success_rate == null ? '—' : Math.round(item.intelligence.delivery_success_rate * 100) + '%'} <small>({item.intelligence?.delivery_samples || 0})</small></dd></div><div><dt>{t('延迟 P95')}</dt><dd>{item.intelligence?.latency_p95_ms == null ? '—' : item.intelligence.latency_p95_ms + ' ms'}</dd></div></dl>
+          <p className="fine-print">{t('近 24 小时观测；无样本显示横线。收件率按已结束等待任务统计。')}</p>
+          <button className="text-button" disabled={!!pending || item.admission_state !== 'enabled'} onClick={() => void perform('probe', async () => { await write('/providers/' + item.id + '/probes'); }, t('来源探测已排队'))}>{t('测试健康度')}<Radio size={13} /></button>
           <div className="source-links">{item.homepage && <a href={item.homepage} target="_blank" rel="noreferrer">{t("官方网站")}<ExternalLink size={12} /></a>}{item.credential_fields.length > 0 && <button onClick={() => setConfigureSource(item)}>{item.configured ? t("修改配置") : t("配置来源")}</button>}</div>
           <button className="text-button" disabled={item.admission_state !== 'enabled'} onClick={() => { setCreateProvider(item.id); setModal('create'); }}>{item.admission_state === 'enabled' ? t("创建邮箱") : t(sourceStates[item.admission_state])}<ArrowRight size={14} /></button>
         </article>)}</div>}
@@ -372,13 +378,14 @@ function Console({ session, theme, toggle, logout }: { session: Session; theme: 
           {item.matched_message_id && <button className="text-button" onClick={() => { setBoxId(item.mailbox_id); setTimeout(() => setMessageId(item.matched_message_id), 0); setView('inbox'); setMobile('reader'); }}>{t("查看邮件")}<ArrowRight size={13} /></button>}
         </article>)}</div>}<p className="panel-note">{t("展示最近 100 个任务。任务持久保存在服务端，关闭页面不会中断等待；到期与取消均有明确状态。")}</p>
       </section>}
+      {view === 'automation' && <AutomationPanel providers={providers.data?.items || []} />}
       {view === 'api' && <section className="api-grid"><article className="api-intro"><span className="provider-symbol"><Terminal size={25} strokeWidth={1.3} /></span><h2>{t("让收件成为")}<br />{t("工作流的一部分。")}</h2><p>{t("统一 JSON 接口，持久化等待任务，实时事件。浏览器与自动化共享同一份邮件状态。")}</p><a className="button secondary" href="/api/docs" target="_blank" rel="noreferrer">{t("打开接口文档")}<ExternalLink size={14} /></a><div className="token-section"><h3>{t("邮箱访问令牌")}</h3><p>{t("仅授权当前选中的邮箱，1 小时后失效。令牌仅在签发后展示，请妥善保存。")}</p><div className="token-box-name"><Mail size={14} />{box?.address || t("请先选择一个使用中的邮箱")}</div>
         {issuedToken ? <div className="token-result"><code>{issuedToken}</code><button className="icon-button" aria-label={t("复制访问令牌")} onClick={() => void copy(issuedToken)}><Copy size={15} /></button></div> : <button className="text-button" disabled={!active || !!pending} onClick={() => void perform('token', async () => {
           const result = await write<{ access_token: string }>('/mailboxes/' + boxId + '/tokens', { scopes: ['mailbox:read', 'messages:read', 'messages:fetch', 'waits:write', 'events:read'], ttl_seconds: 3600 }); setIssuedToken(result.access_token);
         })}>{t("生成当前邮箱令牌")}<ArrowRight size={14} /></button>}</div></article>
         <article className="code-panel"><div className="code-heading"><span><Circle size={7} fill="currentColor" />API / v1</span><button className="text-button" onClick={() => void copy(snippet)}><Copy size={13} />{t("复制示例")}</button></div><pre>{snippet}</pre><div className="code-notes"><p><Check size={14} />{t("写入请求支持幂等键")}</p><p><Check size={14} />{t("邮箱令牌按箱授权")}</p><p><Check size={14} />{t("错误使用 application/problem+json")}</p></div></article>
       </section>}
-      <footer className="page-footer"><span><Glyph small />LINSEMAIL <span className="footer-slash">/</span><RepositoryLink credit /></span><span>{t("本地工作区")}<span className="footer-dot">·</span>v0.3.1</span></footer>
+      <footer className="page-footer"><span><Glyph small />LINSEMAIL <span className="footer-slash">/</span><RepositoryLink credit /></span><span>{t("本地工作区")}<span className="footer-dot">·</span>v0.4.0</span></footer>
     </main>
     {notice && <div className={'toast' + (notice.error ? ' error' : '')} role="status">{notice.error ? <Circle size={15} /> : <Check size={15} />}{t(notice.text)}<button className="icon-button compact" aria-label={t("关闭提示")} onClick={() => setNotice(null)}><X size={14} /></button></div>}
     {configureSource && <ProviderSettings source={configureSource} pending={pending === 'configure'} close={() => setConfigureSource(null)} save={credentials => void perform('configure', async () => {
@@ -388,7 +395,7 @@ function Console({ session, theme, toggle, logout }: { session: Session; theme: 
       await api('/providers/' + configureSource.id + '/configuration', { method: 'DELETE' });
       await query.invalidateQueries({ queryKey: ['providers'] }); setConfigureSource(null);
     }, t("已移除来源配置"))} />}
-    {modal === 'create' && <CreateForm providers={providers.data?.items || []} initialProvider={createProvider} pending={pending === 'create'} close={() => { setModal(null); setCreateProvider('local'); }} submit={data => void perform('create', async () => {
+    {modal === 'create' && <CreateForm providers={providers.data?.items || []} initialProvider={createProvider} pending={pending === 'create'} close={() => { setModal(null); setCreateProvider(''); }} submit={data => void perform('create', async () => {
       const operation = await write<Operation>('/mailboxes', data); setBoxId(operation.resource_id); setView('inbox'); setMobile('messages'); setModal(null); refresh(); await finish(operation);
     }, t("新邮箱已就绪"))} />}
     {modal === 'wait' && box && <WaitForm box={box} pending={pending === 'wait'} close={() => setModal(null)} submit={data => void perform('wait', async () => { await write<WaitJob>('/mailboxes/' + box.id + '/waits', data); setModal(null); setView('waits'); }, t("等待任务已创建"))} />}

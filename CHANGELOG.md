@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.0 — 2026-10-20
+
+- Add measured provider health, latency and wait-outcome metrics, rotating probes and smart source routing.
+- Add durable create-and-wait workflows with restart recovery, idempotent steps, cancellation and total deadlines.
+- Add 11 MCP stdio tools and a signed webhook transactional outbox with bounded retries and delivery visibility.
+- Add bilingual automation UI, provider metrics, integration guides, architecture and an explicit roadmap.
+- Retain the patched dependency locks from 0.3.1; existing mailbox APIs and stored sessions remain compatible.
+
 ## 0.3.1 — 2026-10-19
 
 - Upgrade cryptography, Starlette, FastAPI, pytest, Vite and the React Vite plugin to patched compatible versions. Regenerate Python and npm locks.

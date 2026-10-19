@@ -42,6 +42,7 @@ function visit(node) {
   ts.forEachChild(node, visit);
 }
 visit(ast);
+visit(ts.createSourceFile('AutomationPanel.tsx', fs.readFileSync(path.join(root, 'frontend/src/AutomationPanel.tsx'), 'utf8'), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX));
 assert.deepEqual([...missing], [], 'Every interface string must have an English translation');
 const apiSandbox = { exports: {}, require: name => { assert.equal(name, './i18n'); return i18n; }, Intl, Date };
 vm.runInNewContext(compile('frontend/src/api.ts'), apiSandbox);

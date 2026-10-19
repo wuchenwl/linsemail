@@ -20,7 +20,7 @@ ROOT_FILES = ['README.md', 'README.zh-CN.md', 'README.en.md', 'LICENSE', 'CONTRI
 SCRIPTS = ['console-services.py', 'start-console.ps1', 'stop-console.ps1', 'test-i18n.cjs',
            'screenshot-console.py', 'package-release.py', 'check-release.py',
            'summarize_tasklet_test.py', 'check_tasklet_inboxes.py', 'tasklet_mail_probe.py']
-DOCS = ['architecture.md', 'architecture.zh-CN.md', 'api.md', 'api.zh-CN.md',
+DOCS = ['releases/v0.4.0.md', 'agent-screenshots/automation-zh-CN-light.png', 'agent-screenshots/automation-zh-CN-dark.png', 'agent-screenshots/automation-en-light.png', 'agent-screenshots/automation-en-dark.png', 'agent.md', 'agent.zh-CN.md', 'roadmap.md', 'roadmap.zh-CN.md', 'architecture.md', 'architecture.zh-CN.md', 'api.md', 'api.zh-CN.md',
         'github-description.md', 'social-preview.png', 'social-preview.html', 'releases/v0.3.0.md', 'releases/v0.3.1.md', 'mailbox-prefix.md', 'screenshots/README.md', 'screenshots/manifest.json']
 BLOCKED_PARTS = {'.runtime', '.venv', 'node_modules', '__pycache__', '.git', 'research', '.pytest_cache'}
 FIXED_TIME = (2026, 10, 19, 0, 0, 0)

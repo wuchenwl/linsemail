@@ -122,6 +122,7 @@ class TokenIssued(Token):
     token_type:Literal["Bearer"]
 
 class Provider(BaseModel):
+    intelligence:dict|None=None
     id:str
     name:str
     mailbox_access:str
@@ -142,3 +143,27 @@ class Provider(BaseModel):
 
 class ProviderPage(Page[Provider]):
     summary:dict[str,int]
+
+
+class Task(BaseModel):
+    id:str
+    kind:Literal['workflow','probe']
+    state:Literal['queued','running','waiting','succeeded','matched','failed','timed_out','cancelled']
+    result:dict
+    error:Problem|None
+    attempts:int
+    created_at:str
+    updated_at:str
+    deadline_at:str
+
+
+class Webhook(BaseModel):
+    id:str
+    url:str
+    events:list[str]
+    active:bool
+    created_at:str
+
+
+class WebhookIssued(Webhook):
+    secret:str

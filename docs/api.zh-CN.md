@@ -75,3 +75,13 @@ SSE 接口提供资源变更通知，使用事件 ID 支持重连；游标语义
 ## 本机测试箱
 
 使用 `provider_id: "local"` 创建邮箱，待状态活跃后，将测试邮件发送至分配的 `@local.linsemail.test` 地址，SMTP 为 `127.0.0.1:1025`。监听器只接收活跃的本机收件人；该能力不会配置公网 MX 或公网 SMTP 投递。
+
+## 智能路由、组合任务与事件集成
+
+建箱的 `provider_id` 可省略。`GET /routing/preview` 返回候选与分数；`GET /providers/intelligence` 返回健康度、P95 延迟与等待结果样本。手动探测 `POST /providers/PROVIDER/probes` 返回 202 和任务 ID。
+
+`POST /workflows` 接收建箱字段、`predicate` 和 5–300 秒总时限；`GET /tasks`、`GET /tasks/TASK_ID` 和 `DELETE /tasks/TASK_ID` 负责查询与取消。探测与工作流均需要工作区凭据。
+
+`POST /webhooks` 用幂等键创建签名事件订阅；`GET /webhooks` 查询，`DELETE /webhooks/WEBHOOK_ID` 停用，`GET /webhook-deliveries` 查看最近结果。订阅事件和签名校验见 [开发工具接入指南](agent.zh-CN.md)。
+
+新增资源列表目前最多返回 100 条；来源指标单独注明窗口与样本上限。现有邮箱/邮件接口的分页契约保持不变。MCP 通过同一 HTTP API 工作，不赋予额外权限。
