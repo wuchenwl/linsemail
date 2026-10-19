@@ -1,0 +1,468 @@
+{
+  "data": "Synthetic API fixtures rendered by the real frontend; no provider requests.",
+  "screenshots": [
+    {
+      "file": "login-en-light.png",
+      "locale": "en",
+      "view": "login",
+      "theme": "light",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 32879,
+      "sha256": "85d8e32a6049aea673d937396bf0c74b9bf15ef8d2505f03120c941de2a2974d"
+    },
+    {
+      "file": "inbox-en-light.png",
+      "locale": "en",
+      "view": "inbox",
+      "theme": "light",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 85228,
+      "sha256": "d2564fc96a01fbbce9ffa62fcf68c13d47c08a12c707007201df3a2e480f9c21"
+    },
+    {
+      "file": "inbox-en-dark.png",
+      "locale": "en",
+      "view": "inbox",
+      "theme": "dark",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 86096,
+      "sha256": "891255992fc6b10a318f0cee0c5fbd1b686a2e8cef7b048bcfb6a69a023c3d62"
+    },
+    {
+      "file": "waits-en-light.png",
+      "locale": "en",
+      "view": "waits",
+      "theme": "light",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 48219,
+      "sha256": "a1e60c6ab126ed4d966f48daa4fbace72e22b95b2438a903fb160feb755542f3"
+    },
+    {
+      "file": "providers-en-light.png",
+      "locale": "en",
+      "view": "providers",
+      "theme": "light",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 59413,
+      "sha256": "688c41b554f83daea17c32c3fb9e42b92769dc745cc71f04ed5cf650e78acf01"
+    },
+    {
+      "file": "api-en-light.png",
+      "locale": "en",
+      "view": "api",
+      "theme": "light",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 74537,
+      "sha256": "6d30f7cc340b02465f4c8154b10484ec29fb3e90bee154d23ec3263abde5fa2d"
+    },
+    {
+      "file": "create-en-light.png",
+      "locale": "en",
+      "view": "create",
+      "theme": "light",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 141365,
+      "sha256": "1816f0004a913957953d480e10d6332cc8f97a13c6ae77ff1a2e8ad92e0a5f18"
+    },
+    {
+      "file": "mobile-en-dark.png",
+      "locale": "en",
+      "view": "mobile",
+      "theme": "dark",
+      "width": 390,
+      "height": 844,
+      "bytes": 39730,
+      "sha256": "7226f283d0f4af7ad6767306f82cadf85e33824aa6351d7f7c0f542ef4e60b59"
+    },
+    {
+      "file": "login-zh-CN-light.png",
+      "locale": "zh-CN",
+      "view": "login",
+      "theme": "light",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 32794,
+      "sha256": "dbd54452f7e2a2a2e4bf0dd8bb60a9be1e52127cbcfc1ae6aab81a696c8e0c66"
+    },
+    {
+      "file": "inbox-zh-CN-light.png",
+      "locale": "zh-CN",
+      "view": "inbox",
+      "theme": "light",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 89274,
+      "sha256": "bd5a7747566bbb992438c81a7afec5a5008c54deb038702240702ba614ec25f5"
+    },
+    {
+      "file": "inbox-zh-CN-dark.png",
+      "locale": "zh-CN",
+      "view": "inbox",
+      "theme": "dark",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 89812,
+      "sha256": "1f422cc45a37a6de3c10b59e7f0878b1fe84c608cd2b382274e5123f0d559c54"
+    },
+    {
+      "file": "waits-zh-CN-light.png",
+      "locale": "zh-CN",
+      "view": "waits",
+      "theme": "light",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 49020,
+      "sha256": "5cb1368a80a0324ac374c40d3b46cd3d548e67180faee063e455a1926f5ed050"
+    },
+    {
+      "file": "providers-zh-CN-light.png",
+      "locale": "zh-CN",
+      "view": "providers",
+      "theme": "light",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 71499,
+      "sha256": "8fd7a77bb3c2f80f8fb86fd516b321cb5614f65485d02bca6974c2ab3c567942"
+    },
+    {
+      "file": "api-zh-CN-light.png",
+      "locale": "zh-CN",
+      "view": "api",
+      "theme": "light",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 78837,
+      "sha256": "5caf823d72f4b6d22b11eee8a1c2ae52e7ee02e3d1f04fa40eee196e36ba91ea"
+    },
+    {
+      "file": "create-zh-CN-light.png",
+      "locale": "zh-CN",
+      "view": "create",
+      "theme": "light",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 139631,
+      "sha256": "60addf073deb39156a681b0511752d31a49dc7d92456aad6492a082b088674ff"
+    },
+    {
+      "file": "mobile-zh-CN-dark.png",
+      "locale": "zh-CN",
+      "view": "mobile",
+      "theme": "dark",
+      "width": 390,
+      "height": 844,
+      "bytes": 41851,
+      "sha256": "899eca7340883709bed31ec79c661f69985e83a89a43ebf8b1b506d6198b1c83"
+    }
+  ],
+  "layouts": [
+    {
+      "locale": "en",
+      "view": "inbox",
+      "width": 320,
+      "scroll": 320
+    },
+    {
+      "locale": "en",
+      "view": "waits",
+      "width": 320,
+      "scroll": 320
+    },
+    {
+      "locale": "en",
+      "view": "providers",
+      "width": 320,
+      "scroll": 320
+    },
+    {
+      "locale": "en",
+      "view": "api",
+      "width": 320,
+      "scroll": 320
+    },
+    {
+      "locale": "en",
+      "view": "inbox",
+      "width": 390,
+      "scroll": 390
+    },
+    {
+      "locale": "en",
+      "view": "waits",
+      "width": 390,
+      "scroll": 390
+    },
+    {
+      "locale": "en",
+      "view": "providers",
+      "width": 390,
+      "scroll": 390
+    },
+    {
+      "locale": "en",
+      "view": "api",
+      "width": 390,
+      "scroll": 390
+    },
+    {
+      "locale": "en",
+      "view": "inbox",
+      "width": 768,
+      "scroll": 768
+    },
+    {
+      "locale": "en",
+      "view": "waits",
+      "width": 768,
+      "scroll": 768
+    },
+    {
+      "locale": "en",
+      "view": "providers",
+      "width": 768,
+      "scroll": 768
+    },
+    {
+      "locale": "en",
+      "view": "api",
+      "width": 768,
+      "scroll": 768
+    },
+    {
+      "locale": "en",
+      "view": "inbox",
+      "width": 1024,
+      "scroll": 1024
+    },
+    {
+      "locale": "en",
+      "view": "waits",
+      "width": 1024,
+      "scroll": 1024
+    },
+    {
+      "locale": "en",
+      "view": "providers",
+      "width": 1024,
+      "scroll": 1024
+    },
+    {
+      "locale": "en",
+      "view": "api",
+      "width": 1024,
+      "scroll": 1024
+    },
+    {
+      "locale": "en",
+      "view": "inbox",
+      "width": 1440,
+      "scroll": 1440
+    },
+    {
+      "locale": "en",
+      "view": "waits",
+      "width": 1440,
+      "scroll": 1440
+    },
+    {
+      "locale": "en",
+      "view": "providers",
+      "width": 1440,
+      "scroll": 1440
+    },
+    {
+      "locale": "en",
+      "view": "api",
+      "width": 1440,
+      "scroll": 1440
+    },
+    {
+      "locale": "en",
+      "view": "inbox",
+      "width": 1920,
+      "scroll": 1920
+    },
+    {
+      "locale": "en",
+      "view": "waits",
+      "width": 1920,
+      "scroll": 1920
+    },
+    {
+      "locale": "en",
+      "view": "providers",
+      "width": 1920,
+      "scroll": 1920
+    },
+    {
+      "locale": "en",
+      "view": "api",
+      "width": 1920,
+      "scroll": 1920
+    },
+    {
+      "locale": "zh-CN",
+      "view": "inbox",
+      "width": 320,
+      "scroll": 320
+    },
+    {
+      "locale": "zh-CN",
+      "view": "waits",
+      "width": 320,
+      "scroll": 320
+    },
+    {
+      "locale": "zh-CN",
+      "view": "providers",
+      "width": 320,
+      "scroll": 320
+    },
+    {
+      "locale": "zh-CN",
+      "view": "api",
+      "width": 320,
+      "scroll": 320
+    },
+    {
+      "locale": "zh-CN",
+      "view": "inbox",
+      "width": 390,
+      "scroll": 390
+    },
+    {
+      "locale": "zh-CN",
+      "view": "waits",
+      "width": 390,
+      "scroll": 390
+    },
+    {
+      "locale": "zh-CN",
+      "view": "providers",
+      "width": 390,
+      "scroll": 390
+    },
+    {
+      "locale": "zh-CN",
+      "view": "api",
+      "width": 390,
+      "scroll": 390
+    },
+    {
+      "locale": "zh-CN",
+      "view": "inbox",
+      "width": 768,
+      "scroll": 768
+    },
+    {
+      "locale": "zh-CN",
+      "view": "waits",
+      "width": 768,
+      "scroll": 768
+    },
+    {
+      "locale": "zh-CN",
+      "view": "providers",
+      "width": 768,
+      "scroll": 768
+    },
+    {
+      "locale": "zh-CN",
+      "view": "api",
+      "width": 768,
+      "scroll": 768
+    },
+    {
+      "locale": "zh-CN",
+      "view": "inbox",
+      "width": 1024,
+      "scroll": 1024
+    },
+    {
+      "locale": "zh-CN",
+      "view": "waits",
+      "width": 1024,
+      "scroll": 1024
+    },
+    {
+      "locale": "zh-CN",
+      "view": "providers",
+      "width": 1024,
+      "scroll": 1024
+    },
+    {
+      "locale": "zh-CN",
+      "view": "api",
+      "width": 1024,
+      "scroll": 1024
+    },
+    {
+      "locale": "zh-CN",
+      "view": "inbox",
+      "width": 1440,
+      "scroll": 1440
+    },
+    {
+      "locale": "zh-CN",
+      "view": "waits",
+      "width": 1440,
+      "scroll": 1440
+    },
+    {
+      "locale": "zh-CN",
+      "view": "providers",
+      "width": 1440,
+      "scroll": 1440
+    },
+    {
+      "locale": "zh-CN",
+      "view": "api",
+      "width": 1440,
+      "scroll": 1440
+    },
+    {
+      "locale": "zh-CN",
+      "view": "inbox",
+      "width": 1920,
+      "scroll": 1920
+    },
+    {
+      "locale": "zh-CN",
+      "view": "waits",
+      "width": 1920,
+      "scroll": 1920
+    },
+    {
+      "locale": "zh-CN",
+      "view": "providers",
+      "width": 1920,
+      "scroll": 1920
+    },
+    {
+      "locale": "zh-CN",
+      "view": "api",
+      "width": 1920,
+      "scroll": 1920
+    }
+  ],
+  "checks": [
+    {
+      "locale": "en",
+      "switching_preserves_content": true,
+      "persistence": true
+    },
+    {
+      "locale": "zh-CN",
+      "switching_preserves_content": true,
+      "persistence": true
+    }
+  ],
+  "errors": []
+}

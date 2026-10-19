@@ -1,0 +1,6 @@
+{
+  "name": "linsemail-local-postgres",
+  "private": true,
+  "type": "module",
+  "dependencies": { "embedded-postgres": "18.4.0-beta.17" }
+}

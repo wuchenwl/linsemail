@@ -1,0 +1,14 @@
+name: Feature request / 功能建议
+description: Propose an improvement or provider adapter.
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Use case and expected result / 使用场景与预期结果
+    validations:
+      required: true
+  - type: textarea
+    id: protocol
+    attributes:
+      label: Design, documentation or API contract / 设计与接口契约
+      description: For a new provider, link public documentation and describe credential requirements.

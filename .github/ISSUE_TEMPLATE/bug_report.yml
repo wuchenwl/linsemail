@@ -1,0 +1,21 @@
+name: Bug report / 问题反馈
+description: Report a reproducible problem with synthetic data.
+body:
+  - type: input
+    id: version
+    attributes:
+      label: Version and environment / 版本与环境
+      placeholder: v0.3.0, Windows 11, Python 3.13, Node 22
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Steps, expected and observed behavior / 步骤、预期与实际行为
+      description: Include the provider ID and error code when relevant. Do not include credentials or real inbox contents.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Redacted logs or screenshots / 已脱敏日志或截图

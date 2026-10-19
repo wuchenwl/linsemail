@@ -1,0 +1,261 @@
+{
+  "description": "Historical public compatibility assertions only; no mailbox identities, credentials, bodies or machine paths. Not a new live test.",
+  "attempts": [
+    {
+      "provider": "best_tempmail",
+      "status": "inbox_check_failed",
+      "email_accepted": null,
+      "ui_send_acknowledged": true,
+      "verification_received": false,
+      "registration_succeeded": false
+    },
+    {
+      "provider": "mailtm",
+      "status": "verification_not_observed",
+      "email_accepted": null,
+      "ui_send_acknowledged": true,
+      "verification_received": false,
+      "registration_succeeded": false
+    },
+    {
+      "provider": "grabmail",
+      "status": "verification_not_observed",
+      "email_accepted": null,
+      "ui_send_acknowledged": true,
+      "verification_received": false,
+      "registration_succeeded": false
+    },
+    {
+      "provider": "tempmail_plus",
+      "status": "verification_not_observed",
+      "email_accepted": null,
+      "ui_send_acknowledged": true,
+      "verification_received": false,
+      "registration_succeeded": false
+    },
+    {
+      "provider": "fakemail",
+      "status": "inbox_check_failed",
+      "email_accepted": null,
+      "ui_send_acknowledged": null,
+      "verification_received": false,
+      "registration_succeeded": false
+    },
+    {
+      "provider": "byom",
+      "status": "verification_not_observed",
+      "email_accepted": null,
+      "ui_send_acknowledged": null,
+      "verification_received": false,
+      "registration_succeeded": false
+    },
+    {
+      "provider": "guerrillamail",
+      "status": "inbox_check_failed",
+      "email_accepted": null,
+      "ui_send_acknowledged": null,
+      "verification_received": false,
+      "registration_succeeded": false
+    },
+    {
+      "provider": "10minutemail_net",
+      "status": "inbox_check_failed",
+      "email_accepted": null,
+      "ui_send_acknowledged": null,
+      "verification_received": false,
+      "registration_succeeded": false
+    },
+    {
+      "provider": "tempmail_lol",
+      "status": "inbox_check_failed",
+      "email_accepted": null,
+      "ui_send_acknowledged": null,
+      "verification_received": false,
+      "registration_succeeded": false
+    },
+    {
+      "provider": "maildrop",
+      "status": "verification_not_observed",
+      "email_accepted": null,
+      "ui_send_acknowledged": null,
+      "verification_received": false,
+      "registration_succeeded": false
+    },
+    {
+      "provider": "dropmail",
+      "status": "inbox_check_failed",
+      "email_accepted": null,
+      "ui_send_acknowledged": null,
+      "verification_received": false,
+      "registration_succeeded": false
+    },
+    {
+      "provider": "duckmail",
+      "status": "verification_not_observed",
+      "email_accepted": null,
+      "ui_send_acknowledged": null,
+      "verification_received": false,
+      "registration_succeeded": false
+    },
+    {
+      "provider": "moakt",
+      "status": "inbox_check_failed",
+      "email_accepted": null,
+      "ui_send_acknowledged": null,
+      "verification_received": false,
+      "registration_succeeded": false
+    },
+    {
+      "provider": "inboxkitten",
+      "status": "verification_not_observed",
+      "email_accepted": null,
+      "ui_send_acknowledged": null,
+      "verification_received": false,
+      "registration_succeeded": false
+    },
+    {
+      "provider": "mohmal",
+      "status": "inbox_check_failed",
+      "email_accepted": null,
+      "ui_send_acknowledged": null,
+      "verification_received": false,
+      "registration_succeeded": false
+    },
+    {
+      "provider": "awamail",
+      "status": "inbox_check_failed",
+      "email_accepted": null,
+      "ui_send_acknowledged": null,
+      "verification_received": false,
+      "registration_succeeded": false
+    },
+    {
+      "provider": "tempmail_ing",
+      "status": "inbox_check_failed",
+      "email_accepted": null,
+      "ui_send_acknowledged": null,
+      "verification_received": false,
+      "registration_succeeded": false
+    },
+    {
+      "provider": "minuteinbox",
+      "status": "inbox_check_failed",
+      "email_accepted": null,
+      "ui_send_acknowledged": null,
+      "verification_received": false,
+      "registration_succeeded": false
+    },
+    {
+      "provider": "tempmailto",
+      "status": "verification_not_observed",
+      "email_accepted": null,
+      "ui_send_acknowledged": null,
+      "verification_received": false,
+      "registration_succeeded": false
+    },
+    {
+      "provider": "10minutemail_one",
+      "status": "verification_not_observed",
+      "email_accepted": null,
+      "ui_send_acknowledged": null,
+      "verification_received": false,
+      "registration_succeeded": false
+    },
+    {
+      "provider": "22do",
+      "status": "verification_not_observed",
+      "email_accepted": null,
+      "ui_send_acknowledged": null,
+      "verification_received": false,
+      "registration_succeeded": false
+    },
+    {
+      "provider": "spambox_xyz",
+      "status": "verification_not_observed",
+      "email_accepted": null,
+      "ui_send_acknowledged": null,
+      "verification_received": false,
+      "registration_succeeded": false
+    },
+    {
+      "provider": "emailtemp_org",
+      "status": "inbox_check_failed",
+      "email_accepted": null,
+      "ui_send_acknowledged": null,
+      "verification_received": false,
+      "registration_succeeded": false
+    },
+    {
+      "provider": "mailtemp_net",
+      "status": "inbox_check_failed",
+      "email_accepted": null,
+      "ui_send_acknowledged": null,
+      "verification_received": false,
+      "registration_succeeded": false
+    },
+    {
+      "provider": "mailtemp_uk",
+      "status": "inbox_check_failed",
+      "email_accepted": null,
+      "ui_send_acknowledged": null,
+      "verification_received": false,
+      "registration_succeeded": false
+    },
+    {
+      "provider": "tempmail100",
+      "status": "verification_not_observed",
+      "email_accepted": null,
+      "ui_send_acknowledged": null,
+      "verification_received": false,
+      "registration_succeeded": false
+    },
+    {
+      "provider": "anonymmail",
+      "status": "verification_not_observed",
+      "email_accepted": null,
+      "ui_send_acknowledged": null,
+      "verification_received": false,
+      "registration_succeeded": false
+    },
+    {
+      "provider": "tempmailbox_net",
+      "status": "verification_not_observed",
+      "email_accepted": null,
+      "ui_send_acknowledged": null,
+      "verification_received": false,
+      "registration_succeeded": false
+    },
+    {
+      "provider": "mailforspam",
+      "status": "verification_not_observed",
+      "email_accepted": null,
+      "ui_send_acknowledged": null,
+      "verification_received": false,
+      "registration_succeeded": false
+    },
+    {
+      "provider": "linshiyou",
+      "status": "verification_not_observed",
+      "email_accepted": null,
+      "ui_send_acknowledged": null,
+      "verification_received": false,
+      "registration_succeeded": false
+    },
+    {
+      "provider": "harakirimail",
+      "status": "verification_not_observed",
+      "email_accepted": null,
+      "ui_send_acknowledged": null,
+      "verification_received": false,
+      "registration_succeeded": false
+    },
+    {
+      "provider": "tempemail_co",
+      "status": "verification_not_observed",
+      "email_accepted": null,
+      "ui_send_acknowledged": null,
+      "verification_received": false,
+      "registration_succeeded": false
+    }
+  ]
+}

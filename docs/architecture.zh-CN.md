@@ -1,0 +1,78 @@
+# 架构设计
+
+[English](architecture.md) · [项目介绍](../README.zh-CN.md)
+
+Linsemail 是运行在本机的收件控制层。邮箱状态、入库顺序、操作与等待任务以数据库为准；浏览器负责呈现同一份状态，而不是另行维护一套收件逻辑。
+
+## 组件与职责
+
+| 组件 | 职责 |
+| --- | --- |
+| React + TypeScript + TanStack Query | 响应式邮箱、邮件、任务、来源与 API 视图 |
+| `frontend/src/i18n.ts` | 显式文案翻译、语言偏好持久化与跨标签页更新 |
+| FastAPI | `/api/v1` 资源校验、鉴权、幂等写入与事件接口 |
+| SQLAlchemy + PostgreSQL | 持久记录、工作区串行化与 worker 租约 |
+| Worker | 执行队列操作、轮询原邮箱、入库邮件并匹配等待任务 |
+| Registry 与适配器族 | 声明真实已实现能力，隔离上游协议差异 |
+| 本机 SMTP | 接收发往活跃本机测试箱的邮件 |
+
+来源平台配置与单个邮箱会话分开管理。移除平台密钥会阻止新建，但已创建邮箱保留自己的会话。桥接层为单次操作在临时目录还原会话，校验原邮箱身份，再将更新后的状态加密保存。
+
+## 从创建到入库
+
+1. 校验输入与来源接入条件，以工作区、路由和请求体建立幂等关系。
+2. 提交创建中邮箱、同步任务与待执行操作。HTTP 202 表示接收请求，不表示上游已经成功。
+3. Worker 领取带租约的任务；提交前再次校验租约持有者与 epoch，阻止过期执行覆盖更新结果。
+4. 创建或重连原来的上游邮箱，保留地址与会话；正文 ID 必须先在本箱列表出现。
+5. 归一化、按上游身份去重、分配邮箱入库序号，并保存提取候选及正文字符位置。
+6. 以新序号匹配等待任务，写入资源事件；界面与自动化从同一 API 读取结果。
+
+来源级轮询预算与错误退避约束调用频率。列表不完整、正文缺失、邮箱身份变化均形成明确状态或错误，不伪装成成功的空收件箱。
+
+## 等待与提取语义
+
+等待条件支持发件域名精确匹配、主题包含与正文包含。未显式指定时，`after_seq` 从当前邮箱序号开始；缺少正文不能命中正文条件。任务持久保存，明确进入命中、取消、超时或邮箱到期状态。
+
+数字验证码需要“verification code”“OTP”等上下文；链接候选依据验证相关 URL 词语识别。每个结果保留来源位置、规则 ID 与歧义状态。它们是可检查的候选，不代表真实性鉴定，也不会自动打开链接。
+
+## 本机信任边界
+
+API 默认监听回环地址，限制 Host/Origin，并对浏览器会话写入校验 CSRF。工作区令牌与邮箱令牌具有不同权限。邮件以纯文本展示，不加载外部脚本或跟踪图片。
+
+来源凭证与会话通过 Fernet 加密；密钥与数据库配置保存在同一 `.runtime/` 下，因此无法抵御能够读取整个运行目录的攻击者。默认本机会话与进程管理脚本面向受信任工作站，并非已加固的公网多租户部署方案。
+
+本地邮箱到期即停止取件，15 分钟宽限期后清理存储。上游保留策略独立于本地；本地删除不意味着来源同步删除。
+
+## 手动部署
+
+自动启动脚本针对 Windows。Linux/macOS 可使用已有 PostgreSQL：安装 Python 3.11+、Node.js 22.12+，并创建自己控制的数据库。
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r backend/requirements.lock.txt
+npm ci --prefix frontend
+npm run build --prefix frontend
+
+# 替换 USER 与 PASSWORD，使用应用专属数据库。
+export LINSEMAIL_DATABASE_URL='postgresql+psycopg://USER:PASSWORD@127.0.0.1:5432/linsemail'
+python -m backend.api
+```
+
+API 初始化数据库后，在另一终端激活相同环境，配置相同数据库 URL 与运行目录，再执行 `python -m backend.worker`。工作台地址为 `http://127.0.0.1:8100`。上述步骤说明手动进程拓扑；当前发布验证在 Windows 启动器下完成，未额外宣称 Linux/macOS 安装已实测。
+
+环境变量见 [`.env.example`](../.env.example)。请设置进程环境；仅复制成 `.env` 不会自动生效。API 与 worker 须使用一致配置。保留会话时应同时备份数据库与加密密钥。
+
+## 目录结构
+
+```text
+backend/                 API、数据库、worker 与来源适配器族
+frontend/                React 界面、中英文词典与前端锁文件
+data/providers.json      来源目录，运行时 registry 推导执行能力
+scripts/                 启动、语言测试、截图与源码打包
+tests/                   旧接口兼容性与协议测试、脱敏固定样本
+docs/                    双语指南与合成数据截图
+.github/                 CI、issue 表单与 PR 模板
+```
+
+根目录 `app.py`、`mail_api.py`、`tasklet_client.py`、`openapi.json` 保留早期目录与邮箱 API 的兼容能力，与控制台 `/api/v1` 区分。历史研究快照与本机执行账本不进入开源包。

@@ -1,0 +1,128 @@
+{
+  "provider_count": 127,
+  "round2_provider_ids": [
+    "agentmail",
+    "mailisk",
+    "mailcx",
+    "tempemail_cc",
+    "best_tempmail",
+    "tempmailto",
+    "emailnator",
+    "tempr_email",
+    "byom",
+    "tempmail_plus",
+    "mailpoof",
+    "maildax",
+    "etempmail",
+    "tempmail_ninja",
+    "disposablemail",
+    "crazymailing",
+    "tempmail_co",
+    "tempmail_email",
+    "synox_disposable_mailbox"
+  ],
+  "documented_no_account_disposable_ids": [
+    "best_tempmail",
+    "burner_kiwi",
+    "dropmail",
+    "grabmail",
+    "guerrillamail",
+    "maildrop",
+    "mailgw",
+    "mailtm",
+    "restmail",
+    "tempemail_cc",
+    "tempmail_lol",
+    "xelio",
+    "destroy_network"
+  ],
+  "metadata_probe_ok_ids": [
+    "mailtm",
+    "maildrop",
+    "grabmail"
+  ],
+  "excluded_provider_ids": [
+    "mail7",
+    "kingtmp",
+    "void_mail",
+    "synox_void_mail"
+  ],
+  "implemented_adapter_ids": [
+    "grabmail",
+    "fakemail",
+    "tempmail_plus",
+    "byom",
+    "guerrillamail",
+    "tempmail_lol",
+    "maildrop",
+    "dropmail",
+    "10minutemail_net",
+    "duckmail",
+    "moakt",
+    "inboxkitten",
+    "mohmal",
+    "awamail",
+    "tempmail_ing",
+    "minuteinbox",
+    "tempmailto",
+    "10minutemail_one",
+    "22do",
+    "mailtemp_net",
+    "spambox_xyz",
+    "mailtemp_uk",
+    "emailtemp_org",
+    "tempmail100",
+    "anonymmail",
+    "tempmailbox_net",
+    "mailforspam",
+    "linshiyou",
+    "harakirimail",
+    "tempemail_co"
+  ],
+  "expansion_provider_ids": [
+    "duckmail",
+    "moakt",
+    "mtempmail",
+    "incognitomail",
+    "mailticking"
+  ],
+  "expansion2_provider_ids": [
+    "awamail",
+    "tempmail_ing",
+    "temptom",
+    "temp_mail_app",
+    "mailtd"
+  ],
+  "expansion3_provider_ids": [
+    "10minutemail_one",
+    "22do",
+    "mailtemp_net",
+    "spambox_xyz",
+    "mail_temp_com"
+  ],
+  "expansion4_provider_ids": [
+    "mailtemp_uk",
+    "emailtemp_org",
+    "tempmail100",
+    "tmail_io",
+    "linshiyouxiang_net",
+    "generator_email"
+  ],
+  "expansion5_provider_ids": [
+    "emailtick",
+    "tempmailbox_net",
+    "anonymmail",
+    "harakirimail",
+    "mailforspam",
+    "spamok",
+    "privatomail",
+    "linshiyou"
+  ],
+  "expansion6_provider_ids": [
+    "chat_tempmail",
+    "tempmail_cc",
+    "tempemail_co",
+    "burner_kiwi",
+    "freemail_cq"
+  ]
+}
