@@ -378,7 +378,7 @@ function Console({ session, theme, toggle, logout }: { session: Session; theme: 
         })}>{t("生成当前邮箱令牌")}<ArrowRight size={14} /></button>}</div></article>
         <article className="code-panel"><div className="code-heading"><span><Circle size={7} fill="currentColor" />API / v1</span><button className="text-button" onClick={() => void copy(snippet)}><Copy size={13} />{t("复制示例")}</button></div><pre>{snippet}</pre><div className="code-notes"><p><Check size={14} />{t("写入请求支持幂等键")}</p><p><Check size={14} />{t("邮箱令牌按箱授权")}</p><p><Check size={14} />{t("错误使用 application/problem+json")}</p></div></article>
       </section>}
-      <footer className="page-footer"><span><Glyph small />LINSEMAIL <span className="footer-slash">/</span><RepositoryLink credit /></span><span>{t("本地工作区")}<span className="footer-dot">·</span>v0.3.0</span></footer>
+      <footer className="page-footer"><span><Glyph small />LINSEMAIL <span className="footer-slash">/</span><RepositoryLink credit /></span><span>{t("本地工作区")}<span className="footer-dot">·</span>v0.3.1</span></footer>
     </main>
     {notice && <div className={'toast' + (notice.error ? ' error' : '')} role="status">{notice.error ? <Circle size={15} /> : <Check size={15} />}{t(notice.text)}<button className="icon-button compact" aria-label={t("关闭提示")} onClick={() => setNotice(null)}><X size={14} /></button></div>}
     {configureSource && <ProviderSettings source={configureSource} pending={pending === 'configure'} close={() => setConfigureSource(null)} save={credentials => void perform('configure', async () => {

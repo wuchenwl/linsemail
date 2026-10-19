@@ -38,7 +38,7 @@ The visual design is deliberately quiet. A monochrome palette, clear typography 
 
 ## Provider coverage, precisely stated
 
-| Catalog at v0.3.0 | Count | Meaning |
+| Catalog at v0.3.1 | Count | Meaning |
 | --- | ---: | --- |
 | External provider entries | 127 | Discovered services with catalog metadata |
 | Implemented external adapters | 97 | Executable create/list/body protocols |

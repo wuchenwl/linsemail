@@ -1,6 +1,6 @@
 {
   "project": "Linsemail",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "kind": "source",
   "excludes": [
     ".git",
@@ -45,16 +45,16 @@
       "sha256": "32a161a3174ea1cdb93092bb7040a43dbbd93e55f52927b91d4f61fbf1b78279"
     },
     ".github/workflows/ci.yml": {
-      "bytes": 1356,
-      "sha256": "2f6749c0f118f4aa3141e9130c576faf6af43c6793599bb34024704930689db2"
+      "bytes": 1627,
+      "sha256": "085dc07b2b57fa66a53a14543accd92b28928a6c5e1b541f8a74e88fe21d3c57"
     },
     ".gitignore": {
       "bytes": 368,
       "sha256": "b39545bab9a382339b708f45dfb600c5b805b1536cc526554269c1b340588eca"
     },
     "CHANGELOG.md": {
-      "bytes": 1286,
-      "sha256": "f0ea4470373df81f2663d8535145ecd66398d57e10c3b4885730d7e815ebbdac"
+      "bytes": 1763,
+      "sha256": "80220f33994ea2199b1af2abfcfac4f95987c5b90eac94d17b8b0726cf178b46"
     },
     "CODE_OF_CONDUCT.md": {
       "bytes": 979,
@@ -70,15 +70,15 @@
     },
     "README.en.md": {
       "bytes": 9854,
-      "sha256": "923824d59edc5c888aab449da4d938e186984d28dc8cad1999ae4e4f7b7dc5ce"
+      "sha256": "949f636f2f3c942a0afd584a0038bc0b721b7004d9186730a74b526e0475763b"
     },
     "README.md": {
       "bytes": 9561,
-      "sha256": "98df54f271b739bc7ba212605cf789b5fab32648ddb5be726957c2f93bc56de6"
+      "sha256": "d31ccdcb4e1c48d72b5aa0c686c8703bf6299c11d09f3304f8b143001c6b5a8b"
     },
     "README.zh-CN.md": {
       "bytes": 9561,
-      "sha256": "98df54f271b739bc7ba212605cf789b5fab32648ddb5be726957c2f93bc56de6"
+      "sha256": "d31ccdcb4e1c48d72b5aa0c686c8703bf6299c11d09f3304f8b143001c6b5a8b"
     },
     "SECURITY.md": {
       "bytes": 2309,
@@ -89,8 +89,8 @@
       "sha256": "69ab41c2904a9021bf118164eb2684a1cabebe41cef31010c7fc6ca6ffb092dd"
     },
     "VERSION": {
-      "bytes": 7,
-      "sha256": "c3e6947edad6581d229209ce319ce4498a03f3ed0846b74bb647247a749c1e46"
+      "bytes": 6,
+      "sha256": "79e3f22ca37c7fdf4c29ae3648d6b008c3cb6547260a453409275470919dc674"
     },
     "app.py": {
       "bytes": 7097,
@@ -102,7 +102,7 @@
     },
     "backend/api.py": {
       "bytes": 19946,
-      "sha256": "8284a2b3664b4e9265edf629b49a7e62e0ee990501ba96744494214d6baddbfc"
+      "sha256": "c8ef16d374ecfbc33f5e3643f24c4a6ffeb4d35fc93e74c1ea1c1e405a96dd99"
     },
     "backend/config.py": {
       "bytes": 1068,
@@ -145,12 +145,12 @@
       "sha256": "7de7d8e5d7962be4c9876ea88973bbf4f51c7f5730c6275116997dbf6f0e0813"
     },
     "backend/requirements.lock.txt": {
-      "bytes": 574,
-      "sha256": "cfbdb4e68ab304c215373f41d50683d6a512f2c4979a3c5c4f000d7f1d97e16d"
+      "bytes": 588,
+      "sha256": "1d6f2daffcc2d3731688f33db762f3112a49e4e31268712f0c4e643251163d9e"
     },
     "backend/requirements.txt": {
-      "bytes": 149,
-      "sha256": "3d0e8f090858d8928342f54e7b8e99bb57a9a42d59119d9a784d61d29232f0ab"
+      "bytes": 158,
+      "sha256": "79f3ab5e42699c42a9feb83f2b7ba69868a1e70408fd2796176656ffca882f1d"
     },
     "backend/schemas.py": {
       "bytes": 3244,
@@ -234,7 +234,7 @@
     },
     "docs/github-description.md": {
       "bytes": 2480,
-      "sha256": "b50f31ec408b1c2e8cc4d5891c23230807aea24cc6546b0b77cddce6c185e94a"
+      "sha256": "96205f422a39ca28dad61a5b306fa5ad4ab519b4784d0f586a61451cd6a25536"
     },
     "docs/mailbox-prefix.md": {
       "bytes": 1278,
@@ -243,6 +243,10 @@
     "docs/releases/v0.3.0.md": {
       "bytes": 2623,
       "sha256": "6df25f59831f81062805aee994989b0049187a9c4dfe48e535e969fc3fd60398"
+    },
+    "docs/releases/v0.3.1.md": {
+      "bytes": 2589,
+      "sha256": "be6ed6a1185bbbb97d325af941dad168d854ebefdeea62100cba3a8daf13d820"
     },
     "docs/screenshots/README.md": {
       "bytes": 1211,
@@ -329,16 +333,16 @@
       "sha256": "7403e2b9ad5c9864338782ed9ab89ef2f86ad34d7303416928f6242a0d735a63"
     },
     "frontend/package-lock.json": {
-      "bytes": 63405,
-      "sha256": "201008381e63c056fa18188f1ca253ac358157ad9c1937fd81d178428401479e"
+      "bytes": 63334,
+      "sha256": "b1e2cb7a2ce37047a7f0a6714c338e96621bc6526983e5b5206e07be7a035f53"
     },
     "frontend/package.json": {
-      "bytes": 823,
-      "sha256": "6a2a18017a79b086c0de9e3a66fe992e4c46fda440265d50e81644f04d3f52ee"
+      "bytes": 822,
+      "sha256": "78ecca6d413362406a98e7b002678f3ecf4e76ab3b7782ebc7a51b1a9afcbd03"
     },
     "frontend/src/App.tsx": {
       "bytes": 43450,
-      "sha256": "ed5c875f432167baec4668d3397cc3e089b5f7b546a174c201d8c34b66b1e1fb"
+      "sha256": "d1796fec8f040a8f0c34a00fd090c8c4271ba2ccb51d40ec7f856712511b20f5"
     },
     "frontend/src/api.ts": {
       "bytes": 4257,
@@ -389,8 +393,8 @@
       "sha256": "de9c9a17c609e2e2a50f7be91645f9bdf34475ab6ba8db8a5b3cc5e58194be46"
     },
     "scripts/package-release.py": {
-      "bytes": 7830,
-      "sha256": "6aca92ec250966a94f1a8c7c2f0e286320997ed53750f3b47678aa0d7f944df1"
+      "bytes": 7852,
+      "sha256": "e128428ad88f1269b87e91bba067f20d47faddcdb6b3682c00c7be563c197c41"
     },
     "scripts/screenshot-console.py": {
       "bytes": 12782,

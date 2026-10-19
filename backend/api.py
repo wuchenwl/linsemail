@@ -84,7 +84,7 @@ def create_app(settings=None, database=None):
         if any(key not in allowed or len(request.query_params.getlist(key))>1 for key in request.query_params):
             raise DomainError(422,"unknown_query_parameter","查询参数未知或重复。")
 
-    app = FastAPI(title="Linsemail Console API", version="0.3.0", docs_url="/api/docs", openapi_url="/api/v1/openapi.json", lifespan=lifespan,dependencies=[Depends(strict_query)])
+    app = FastAPI(title="Linsemail Console API", version="0.3.1", docs_url="/api/docs", openapi_url="/api/v1/openapi.json", lifespan=lifespan,dependencies=[Depends(strict_query)])
     app.state.db, app.state.service = db, service
 
     @app.middleware("http")

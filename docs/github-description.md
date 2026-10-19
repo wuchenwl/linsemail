@@ -16,7 +16,7 @@ Local-first temporary email workspace with 97 provider adapters, a unified API, 
 
 ## Release title
 
-Linsemail v0.3.0 — 统一 API、持续取件与邮件匹配
+Linsemail v0.3.1 — 统一 API、持续取件与邮件匹配
 
 ## English release introduction
 

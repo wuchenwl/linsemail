@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.1 — 2026-10-19
+
+- Upgrade cryptography, Starlette, FastAPI, pytest, Vite and the React Vite plugin to patched compatible versions. Regenerate Python and npm locks.
+- Audit Python requirements and both npm dependency trees; add dependency auditing to CI.
+- Preserve mailbox APIs, stored Fernet sessions, 97 provider adapters and the bilingual workspace.
+- Include README badges and LINUX DO acknowledgements; remove the community promotion draft from current sources.
+
 ## 0.3.0 — 2026-10-19
 
 - Add Simplified Chinese and English interface selection on the welcome screen and in the workspace header. Persist the language preference; localize navigation, forms, states, provider descriptions, errors, time and duration formatting.
